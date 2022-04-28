@@ -13,15 +13,15 @@ class Module extends Component {
         <table class="table">
           <thead>
             <tr>
-              {module.map((module) => (
-                <th scope="col">{module}</th>
+              {module.map((column) => (
+                <th scope="col">{column}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {this.props.service.map((entry) => (
               <tr>
-                <th scope="row">Game</th>
+                <th scope="row"></th>
                 {}
                 <td>{Object.values(entry)[1]}</td>
                 <td>{Object.values(entry)[2]}</td>
