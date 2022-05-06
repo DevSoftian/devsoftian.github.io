@@ -6,6 +6,7 @@ import { getProjects } from "../services/projects";
 import { getServices } from "../services/serviceKeys";
 import Module from "./module";
 import Testable from "./testable";
+import pool from "../database";
 class Dashboard extends Component {
   state = {
     games: getGames(),
@@ -15,6 +16,8 @@ class Dashboard extends Component {
   };
 
   render() {
+    let message = pool.query("select * from users");
+    console.log(message);
     console.log("Hello?");
     let moduleNumber = 0;
 
