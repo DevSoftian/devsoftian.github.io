@@ -16,8 +16,8 @@ class Dashboard extends Component {
   };
 
   render() {
-    let message = pool.query("select * from users");
-    console.log(message);
+    // let message = pool.query("select * from users");
+    // console.log(message);
     console.log("Hello?");
     let moduleNumber = 0;
 
