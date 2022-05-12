@@ -38,6 +38,7 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject"
   },
+  "homepage": "http://devsoftian.github.io/devsoftian.github.io",
   "eslintConfig": {
     "extends": [
       "react-app",
