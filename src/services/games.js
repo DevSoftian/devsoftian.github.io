@@ -12,7 +12,7 @@ const games = [
     name: "King of Fighters XV",
     dateFirstPlayed: "02/17/2022",
     dateLastplayed: "02/19/2022",
-    hoursPlayed: "4",
+    hoursPlayed: "2",
     trophyPercentage: "17",
   },
   {
