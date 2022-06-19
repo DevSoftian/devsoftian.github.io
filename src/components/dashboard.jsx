@@ -5,6 +5,7 @@ import { getMovies } from "../services/movies";
 import { getProjects } from "../services/projects";
 import { getServices } from "../services/serviceKeys";
 import Module from "./module";
+import Buglogger from "./buglogger";
 import Testable from "./testable";
 import pool from "../database";
 class Dashboard extends Component {
@@ -38,6 +39,11 @@ class Dashboard extends Component {
           service={this.state.projects}
           module={this.state.services[moduleNumber + 2]}
         ></Module>
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" type="button">
+            Buglogger
+          </button>
+        </div>
       </div>
     );
   }
