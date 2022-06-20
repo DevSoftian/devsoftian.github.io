@@ -8,7 +8,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { Home, Bugsleuth, FooBar, BarWithID } from "./App";
+import Navbar from "./components/navbar";
 import Buglogger from "./components/buglogger";
 
 ReactDOM.render(
@@ -17,7 +17,7 @@ ReactDOM.render(
   // </React.StrictMode>
   <BrowserRouter>
     <Routes>
-      <Route path="/devsoftian.github.io/" element={<Home />} />
+      <Route path="/devsoftian.github.io/" element={<Navbar />} />
       <Route path="/devsoftian.github.io/buglogger/" element={<Buglogger />} />
       <Route path="/devsoftian.github.io/topolify/" element={<App />} />
     </Routes>

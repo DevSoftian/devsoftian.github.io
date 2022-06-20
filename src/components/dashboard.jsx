@@ -8,6 +8,8 @@ import Module from "./module";
 import Buglogger from "./buglogger";
 import Testable from "./testable";
 import pool from "../database";
+import { Link } from "react-router-dom";
+import Navbar from "./navbar";
 class Dashboard extends Component {
   state = {
     games: getGames(),
@@ -24,6 +26,7 @@ class Dashboard extends Component {
 
     return (
       <div>
+        <Navbar />
         <Module
           class="md"
           service={this.state.games}
@@ -39,11 +42,6 @@ class Dashboard extends Component {
           service={this.state.projects}
           module={this.state.services[moduleNumber + 2]}
         ></Module>
-        <div class="d-grid gap-2">
-          <button class="btn btn-primary" type="button">
-            Buglogger
-          </button>
-        </div>
       </div>
     );
   }
