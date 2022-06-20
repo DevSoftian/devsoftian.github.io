@@ -9,15 +9,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Navbar from "./components/navbar";
-import Buglogger from "./components/buglogger";
+import Buglogger from "./components/bugSleuth";
+import LoginForm from "./components/loginForm";
 
 ReactDOM.render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>
+  // Route Declarations
   <BrowserRouter>
     <Routes>
-      <Route path="/devsoftian.github.io/" element={<Navbar />} />
+      <Route path="/devsoftian.github.io/" element={<LoginForm />} />
       <Route path="/devsoftian.github.io/buglogger/" element={<Buglogger />} />
       <Route path="/devsoftian.github.io/topolify/" element={<App />} />
     </Routes>

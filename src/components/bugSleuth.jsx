@@ -16,6 +16,7 @@ class Buglogger extends Component {
           </div>
           <input
             type="text"
+            id="typetext"
             class="form-control"
             placeholder="Username"
             aria-label="Username"
@@ -28,10 +29,11 @@ class Buglogger extends Component {
               </span>
             </div>
             <input
-              type="text"
+              type="password"
+              id="typePassword"
               class="form-control"
-              placeholder="Pass"
-              aria-label="Pass"
+              placeholder="Password"
+              aria-label="Password"
               aria-describedby="basic-addon1"
             ></input>
           </div>

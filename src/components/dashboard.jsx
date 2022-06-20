@@ -5,9 +5,6 @@ import { getMovies } from "../services/movies";
 import { getProjects } from "../services/projects";
 import { getServices } from "../services/serviceKeys";
 import Module from "./module";
-import Buglogger from "./buglogger";
-import Testable from "./testable";
-import pool from "../database";
 import { Link } from "react-router-dom";
 import Navbar from "./navbar";
 class Dashboard extends Component {
@@ -19,14 +16,13 @@ class Dashboard extends Component {
   };
 
   render() {
-    // let message = pool.query("select * from users");
-    // console.log(message);
-    console.log("Hello?");
-    let moduleNumber = 0;
+    let moduleNumber = 0; //PLaceholder modulenumber
 
     return (
       <div>
         <Navbar />
+
+        {/* 3 Module Layout */}
         <Module
           class="md"
           service={this.state.games}
