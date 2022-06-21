@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "./navbar";
 import { bootstrap } from "bootstrap";
+import Input from "./input";
 
 // username = React.createRef();
 // password = React.createRef();
@@ -33,36 +34,22 @@ class LoginForm extends Component {
         <h3>Login</h3>
         <form onSubmit={this.handleSubmit}>
           {/* Username input */}
-          <div class="form-group col-3 mx-auto">
-            <label htmlFor="usernameInput">Username</label>
-            <input
-              value={account.username}
-              name="username"
-              onChange={this.handleChange}
-              type="text"
-              class="form-control"
-              id="usernameInput"
-              aria-describedby="usernameHelp"
-              placeholder="Enter Username"
-            />
-            <small id="usernameHelp" class="form-text text-muted">
-              Please enter your username
-            </small>
-          </div>
+          <Input
+            name="username"
+            label="Username"
+            formType="text"
+            value={account.username}
+            onChange={this.handleChange}
+          />
 
           {/* Password input */}
-          <div class="form-group col-3 mx-auto">
-            <label htmlFor="exampleInputPassword1">Password</label>
-            <input
-              value={account.password}
-              name="password"
-              onChange={this.handleChange}
-              type="password"
-              class="form-control"
-              id="exampleInputPassword1"
-              placeholder="Password"
-            />
-          </div>
+          <Input
+            name="password"
+            label="Password"
+            formType="password"
+            value={account.username}
+            onChange={this.handleChange}
+          />
 
           {/* Check Box */}
           <div class="form-check col-1 mx-auto">
