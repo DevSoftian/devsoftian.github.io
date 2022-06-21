@@ -22,17 +22,21 @@ class Dashboard extends Component {
       <div>
         <Navbar />
 
-        {/* 3 Module Layout */}
+        {/* Module 1 */}
         <Module
           class="md"
           service={this.state.games}
           module={this.state.services[moduleNumber]}
         ></Module>
+
+        {/*  Module 2 */}
         <Module
           class="md"
           service={this.state.movies}
           module={this.state.services[moduleNumber + 1]}
         ></Module>
+
+        {/*  Module 3 */}
         <Module
           class="md"
           service={this.state.projects}

@@ -8,7 +8,7 @@ class Module extends Component {
     console.log(this.props.service);
 
     return (
-      //Attempting to factor out the functionality for a module (games, movies, etc.) from Dashboard
+      //Factors out the functionality for a module (games, movies, etc.) from Dashboard
       <div class="table-responsive">
         <table class="table">
           <thead>

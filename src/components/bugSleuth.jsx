@@ -8,6 +8,7 @@ class Buglogger extends Component {
     return (
       <div>
         <Navbar />
+
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1">
@@ -22,6 +23,7 @@ class Buglogger extends Component {
             aria-label="Username"
             aria-describedby="basic-addon1"
           ></input>
+
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">
