@@ -31,6 +31,7 @@ class LoginForm extends Component {
     return (
       <div class="text-center">
         <Navbar />
+        {/* Login box */}
         <div class="container">
           <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -73,7 +74,7 @@ class LoginForm extends Component {
                         Remember password
                       </label>
                     </div>
-
+                    {/* Submit button */}
                     <div class="d-grid">
                       <button
                         class="btn btn-primary btn-login text-uppercase fw-bold"

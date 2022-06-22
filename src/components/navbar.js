@@ -37,7 +37,7 @@ class Navbar extends Component {
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/devsoftian.github.io/buglogger/">
+                <a class="nav-link" href="/devsoftian.github.io/bugsleuth/">
                   BugSleuth
                 </a>
               </li>

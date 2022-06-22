@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import bootstrap from "bootstrap";
 import Navbar from "./navbar";
 
-class Buglogger extends Component {
+class BugSleuth extends Component {
   state = {};
   render() {
     return (
@@ -45,4 +45,4 @@ class Buglogger extends Component {
   }
 }
 
-export default Buglogger;
+export default BugSleuth;

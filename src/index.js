@@ -9,7 +9,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Navbar from "./components/navbar";
-import Buglogger from "./components/bugSleuth";
+import BugSleuth from "./components/bugSleuth";
 import LoginForm from "./components/loginForm";
 
 ReactDOM.render(
@@ -17,7 +17,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Routes>
       <Route path="/devsoftian.github.io/" element={<LoginForm />} />
-      <Route path="/devsoftian.github.io/buglogger/" element={<Buglogger />} />
+      <Route path="/devsoftian.github.io/bugsleuth/" element={<BugSleuth />} />
       <Route path="/devsoftian.github.io/topolify/" element={<App />} />
     </Routes>
   </BrowserRouter>,
