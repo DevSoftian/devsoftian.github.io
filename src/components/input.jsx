@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 const Input = ({ name, label, value, onChange, formType }) => {
   return (
-    <div class="form-group col-3 mx-auto">
+    <div class="form-floating mb-3 mx-auto">
       <label htmlFor={name}>{label}</label>
       <input
         value={value}
