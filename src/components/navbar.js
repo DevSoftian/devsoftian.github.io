@@ -6,12 +6,12 @@ class Navbar extends Component {
     return (
       //Navbar Declaration
       <React.StrictMode>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="#">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <a className="navbar-brand" href="#">
             Topolify
           </a>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-toggle="collapse"
             data-target="#navbarSupportedContent"
@@ -19,25 +19,26 @@ class Navbar extends Component {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
 
           {/* Navbar buttons */}
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="/devsoftian.github.io/">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <a className="nav-link" href="/devsoftian.github.io/">
                   Home
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/devsoftian.github.io/topolify/">
+              <li className="nav-item">
+                <a className="nav-link" href="/devsoftian.github.io/topolify/">
                   Topotracker
-                  {/* <span class="sr-only">(current)</span> This is a text indicating that this is the current location. */}
+                  {/* <span class
+                  Name="sr-only">(current)</span> This is a text indicating that this is the current location. */}
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/devsoftian.github.io/bugsleuth/">
+              <li className="nav-item">
+                <a className="nav-link" href="/devsoftian.github.io/bugsleuth/">
                   BugSleuth
                 </a>
               </li>

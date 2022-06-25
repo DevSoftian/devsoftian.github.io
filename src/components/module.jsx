@@ -9,8 +9,8 @@ class Module extends Component {
 
     return (
       //Factors out the functionality for a module (games, movies, etc.) from Dashboard
-      <div class="table-responsive">
-        <table class="table">
+      <div className="table-responsive">
+        <table className="table">
           <thead>
             <tr>
               {module.map((column) => (

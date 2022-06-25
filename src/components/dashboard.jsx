@@ -24,21 +24,21 @@ class Dashboard extends Component {
 
         {/* Module 1 */}
         <Module
-          class="md"
+          className="md"
           service={this.state.games}
           module={this.state.services[moduleNumber]}
         ></Module>
 
         {/*  Module 2 */}
         <Module
-          class="md"
+          className="md"
           service={this.state.movies}
           module={this.state.services[moduleNumber + 1]}
         ></Module>
 
         {/*  Module 3 */}
         <Module
-          class="md"
+          className="md"
           service={this.state.projects}
           module={this.state.services[moduleNumber + 2]}
         ></Module>
