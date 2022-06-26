@@ -5,7 +5,7 @@ class Module extends Component {
   state = {};
   render() {
     let module = Object.values(this.props.module);
-    console.log(this.props.service);
+    // console.log(this.props.service);
 
     return (
       //Factors out the functionality for a module (games, movies, etc.) from Dashboard

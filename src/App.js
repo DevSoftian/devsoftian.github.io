@@ -6,38 +6,34 @@ import bootstrap from "bootstrap";
 import axios from "axios";
 
 class App extends Component {
-  state = {};
+  state = {
+    posts: [],
+  };
+
+  async componentDidMount() {
+    axios
+      .post("http://141.136.42.108:15868/api/courses", {
+        name: "Charlie",
+      })
+      .then((res) => {
+        console.log(`Status: ${res.status}`);
+        console.log("Body: ", res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+    // console.log("Charlie sent");
+    const { data: posts } = await axios.get("http://141.136.42.108:15868");
+    console.log(posts);
+  }
+
   render() {
     return (
       <React.Fragment>
         <Dashboard></Dashboard>
       </React.Fragment>
-      // <div className="App">
-      //   <header className="App-header">
-      //     <img src={logo} className="App-logo" alt="logo" />
-      //     <p>
-      //       Edit <code>src/App.js</code> and save to reload.
-      //     </p>
-      //     <a
-      //       className="App-link"
-      //       href="https://reactjs.org"
-      //       target="_blank"
-      //       rel="noopener noreferrer"
-      //     >
-      //       Learn React Hello
-      //     </a>
-      //   </header>
-      // </div>);
     );
   }
 }
 
 export default App;
-
-// function App() {
-//   return (
-
-//   );
-// }
-
-// export default App;
