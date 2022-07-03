@@ -1,5 +1,9 @@
 import logo from "./logo.svg";
 import React, { Component } from "react";
+import { getGames } from "../src/services/games";
+import { getMovies } from "../src/services/movies";
+import { getProjects } from "../src/services/projects";
+import { getServices } from "../src/services/serviceKeys";
 import "./App.css";
 import Dashboard from "./components/dashboard";
 import bootstrap from "bootstrap";
@@ -7,6 +11,10 @@ import axios from "axios";
 
 class App extends Component {
   state = {
+    games: getGames(),
+    movies: getMovies(),
+    projects: getProjects(),
+    services: getServices(),
     posts: [],
   };
 
@@ -43,7 +51,12 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Dashboard></Dashboard>
+        <Dashboard
+          movies={this.state.movies}
+          games={this.state.games}
+          projects={this.state.projects}
+          services={this.state.services}
+        ></Dashboard>
       </React.Fragment>
     );
   }
