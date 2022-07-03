@@ -11,20 +11,33 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    axios
-      .post("http://141.136.42.108:15868/api/courses", {
-        name: "Charlie",
-      })
-      .then((res) => {
-        console.log(`Status: ${res.status}`);
-        console.log("Body: ", res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    // console.log("Charlie sent");
-    const { data: posts } = await axios.get("http://141.136.42.108:15868");
+    // axios
+    //   .post("http://141.136.42.108:15868/api/courses", {
+    //     name: "Charlie",
+    //   })
+    //   .then((res) => {
+    //     console.log(`Status: ${res.status}`);
+    //     console.log("Body: ", res.data);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
+
+    // axios.put("http://141.136.42.108:15868/api/courses/1", {
+    //   name: "James",
+    // });
+
+    const { data: posts } = await axios.get(
+      "http://141.136.42.108:15868/api/courses/"
+    );
     console.log(posts);
+
+    // const res = await axios.delete("http://141.136.42.108:15868/api/courses/1");
+    // console.log(res);
+
+    // const second = await axios.get("http://141.136.42.108:15868/api/courses/");
+
+    // console.log(second);
   }
 
   render() {
