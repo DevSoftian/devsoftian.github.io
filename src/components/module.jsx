@@ -2,32 +2,37 @@ import React, { Component } from "react";
 import bootstrap from "bootstrap";
 
 class Module extends Component {
-  state = {};
+  //Maps each subelement in the module to a data cell up to a limit, and returns as an array of elements.
+  mapSubElements = (entry, numElements = 5) => {
+    let cells = [];
+    for (let key in entry) {
+      if (key != "_id" && cells.length <= numElements)
+        cells.push(<td>{entry[key]}</td>);
+    }
+    return cells;
+  };
+
   render() {
+    console.log(this.props);
     let module = Object.values(this.props.module);
-    // console.log(this.props.service);
+    let service = this.props.service;
 
     return (
-      //Factors out the functionality for a module (games, movies, etc.) from Dashboard
+      //Maps column titles from the module object and entry data from the service object.
       <div className="table-responsive">
         <table className="table">
           <thead>
             <tr>
-              {module.map((column) => (
-                <th scope="col">{column}</th>
+              {module.map((moduleTitle) => (
+                <th scope="col">{moduleTitle}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {this.props.service.map((entry) => (
+            {service.map((entry) => (
               <tr>
                 <th scope="row"></th>
-                {}
-                <td>{Object.values(entry)[1]}</td>
-                <td>{Object.values(entry)[2]}</td>
-                <td>{Object.values(entry)[3]}</td>
-                <td>{Object.values(entry)[4]}</td>
-                <td>{Object.values(entry)[5]}</td>
+                {this.mapSubElements(entry)}
               </tr>
             ))}
           </tbody>
