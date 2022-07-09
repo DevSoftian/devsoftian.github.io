@@ -13,9 +13,10 @@ class Module extends Component {
   };
 
   render() {
-    console.log(this.props);
     let module = Object.values(this.props.module);
     let service = this.props.service;
+    console.log(module);
+    console.log(service);
 
     return (
       //Maps column titles from the module object and entry data from the service object.
