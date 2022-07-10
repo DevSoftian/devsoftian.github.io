@@ -5,6 +5,7 @@ import { getMovies } from "../src/services/movies";
 import { getProjects } from "../src/services/projects";
 import { getServices } from "../src/services/serviceKeys";
 import "./App.css";
+import http from "./services/httpService";
 import Dashboard from "./components/dashboard";
 import bootstrap from "bootstrap";
 import axios from "axios";
@@ -35,7 +36,7 @@ class App extends Component {
     //   name: "James",
     // });
 
-    const { data: posts } = await axios.get(
+    const { data: posts } = await http.get(
       "http://141.136.42.108:15868/api/courses/"
     );
     console.log(posts);
