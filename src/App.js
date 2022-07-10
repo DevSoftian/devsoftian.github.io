@@ -5,10 +5,12 @@ import { getMovies } from "../src/services/movies";
 import { getProjects } from "../src/services/projects";
 import { getServices } from "../src/services/serviceKeys";
 import "./App.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import config from "./config.json";
 import http from "./services/httpService";
 import Dashboard from "./components/dashboard";
-import bootstrap from "bootstrap";
+import bootstrap, { Toast } from "bootstrap";
 import axios from "axios";
 
 class App extends Component {
@@ -22,7 +24,7 @@ class App extends Component {
 
   async componentDidMount() {
     // axios
-    //   .post("config.apiEndpointapi/courses", {
+    //   .post(config.apiEndpointapi + "/courses", {
     //     name: "Charlie",
     //   })
     //   .then((res) => {
@@ -33,17 +35,17 @@ class App extends Component {
     //     console.error(err);
     //   });
 
-    // axios.put("config.apiEndpointapi/courses/1", {
+    // axios.put(config.apiEndpointapi + "/courses/1", {
     //   name: "James",
     // });
 
-    const { data: posts } = await http.get("config.apiEndpointapi/courses/");
-    console.log(posts);
+    await http.get("s" + config.apiEndpoint + "api/courses/");
+    // console.log(posts);
 
-    // const res = await axios.delete("config.apiEndpointapi/courses/1");
+    // const res = await axios.delete(config.apiEndpointapi + "/courses/1");
     // console.log(res);
 
-    // const second = await axios.get("config.apiEndpointapi/courses/");
+    // const second = await axios.get(config.apiEndpointapi + "/courses/");
 
     // console.log(second);
   }
@@ -51,6 +53,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
+        <ToastContainer />
         <Dashboard
           movies={this.state.movies}
           games={this.state.games}
