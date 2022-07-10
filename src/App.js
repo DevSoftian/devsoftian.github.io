@@ -5,6 +5,7 @@ import { getMovies } from "../src/services/movies";
 import { getProjects } from "../src/services/projects";
 import { getServices } from "../src/services/serviceKeys";
 import "./App.css";
+import config from "./config.json";
 import http from "./services/httpService";
 import Dashboard from "./components/dashboard";
 import bootstrap from "bootstrap";
@@ -21,7 +22,7 @@ class App extends Component {
 
   async componentDidMount() {
     // axios
-    //   .post("http://141.136.42.108:15868/api/courses", {
+    //   .post("config.apiEndpointapi/courses", {
     //     name: "Charlie",
     //   })
     //   .then((res) => {
@@ -32,19 +33,17 @@ class App extends Component {
     //     console.error(err);
     //   });
 
-    // axios.put("http://141.136.42.108:15868/api/courses/1", {
+    // axios.put("config.apiEndpointapi/courses/1", {
     //   name: "James",
     // });
 
-    const { data: posts } = await http.get(
-      "http://141.136.42.108:15868/api/courses/"
-    );
+    const { data: posts } = await http.get("config.apiEndpointapi/courses/");
     console.log(posts);
 
-    // const res = await axios.delete("http://141.136.42.108:15868/api/courses/1");
+    // const res = await axios.delete("config.apiEndpointapi/courses/1");
     // console.log(res);
 
-    // const second = await axios.get("http://141.136.42.108:15868/api/courses/");
+    // const second = await axios.get("config.apiEndpointapi/courses/");
 
     // console.log(second);
   }
