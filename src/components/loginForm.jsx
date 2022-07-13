@@ -14,9 +14,10 @@ class LoginForm extends Component {
 
   //Handles form submission.
   handleSubmit = async (e) => {
-    await userService.registerUser(this.state.account); // e.preventDefault(); //Prevents default behavior (submitting and reloading the whole page).
-
+    e.preventDefault(); //Prevents default behavior (submitting and reloading the whole page).
+    const response = await userService.registerUser(this.state.account);
     console.log("Submitted");
+    console.log(response);
   };
 
   //Handles input changes by updating the state.
@@ -85,6 +86,7 @@ class LoginForm extends Component {
                     {/* Submit button */}
                     <div className="d-grid">
                       <button
+                        onClick={this.onSubmit}
                         className="btn btn-primary btn-login text-uppercase fw-bold"
                         type="submit"
                       >

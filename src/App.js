@@ -39,8 +39,8 @@ class App extends Component {
     //   name: "James",
     // });
 
-    await http.get("s" + config.apiEndpoint + "api/courses/");
-    // console.log(posts);
+    const { data: posts } = await http.get(config.apiEndpoint + "api/courses/");
+    console.log(posts);
 
     // const res = await axios.delete(config.apiEndpointapi + "/courses/1");
     // console.log(res);
