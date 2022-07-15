@@ -10,28 +10,33 @@ import * as userService from "../services/userService";
 class LoginForm extends Component {
   state = {
     account: { username: "", password: "", name: "" },
+    labels: { username: "Email", password: "Password", name: "Name" },
   };
 
   //Handles form submission.
   handleSubmit = async (e) => {
     e.preventDefault(); //Prevents default behavior (submitting and reloading the whole page).
     const response = await userService.registerUser(this.state.account);
-    console.log("Submitted");
-    console.log(response);
+    const account = { username: "", password: "", name: "" };
+    this.setState({ account });
   };
 
-  //Handles input changes by updating the state.
+  //Handles input changes by updating the state and removes labels once a value is entered into the a field.
   handleChange = ({ currentTarget: input }) => {
     const account = { ...this.state.account };
+    const labels = { ...this.state.labels };
+    labels[input.name] = "";
     account[input.name] = input.value;
-    this.setState({ account });
+    this.setState({ account, labels });
   };
 
   render() {
     const { account } = this.state;
+    const { labels } = this.state;
 
     return (
       <div className="text-center">
+        {/* Navbar */}
         <Navbar />
         {/* Login box */}
         <div className="container">
@@ -47,23 +52,24 @@ class LoginForm extends Component {
                       {/* Username input */}
                       <Input
                         name="username"
-                        label="Email"
+                        label={labels.username}
                         formType="text"
                         value={account.username}
                         onChange={this.handleChange}
                       />
                     </div>
-                    {/* Password input */}
+                    {/* Name input */}
                     <Input
                       name="name"
-                      label="Name"
+                      label={labels.name}
                       formType="text"
                       value={account.name}
                       onChange={this.handleChange}
                     />
+                    {/* Passphrase input */}
                     <Input
                       name="password"
-                      label="Password"
+                      label={labels.password}
                       formType="password"
                       value={account.password}
                       onChange={this.handleChange}
