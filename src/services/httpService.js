@@ -1,6 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
+//Factors out http service so if there is aneed to change from Axios, code only needs to be changed on one place.
+
+//Logs connection errors to the console and triggers toast error notification.
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
     error.response &&

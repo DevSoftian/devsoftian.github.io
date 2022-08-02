@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import bootstrap from "bootstrap";
 
 class Module extends Component {
-  //Maps each subelement in the module to a data cell up to a limit, and returns as an array of elements.
+  //Maps each value in the "entry" object to a data cell up to an optional limit (numElements), and returns as an array of elements.
   mapSubElements = (entry, numElements = 5) => {
     let cells = [];
     for (let key in entry) {
@@ -19,7 +19,7 @@ class Module extends Component {
     console.log(service);
 
     return (
-      //Maps column titles from the module object and entry data from the service object.
+      //Maps column titles from the "module" object and column data from the "service" object.
       <div className="table-responsive">
         <table className="table">
           <thead>

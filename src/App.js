@@ -53,7 +53,9 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
+        {/* Toast container for potential error message. */}
         <ToastContainer />
+
         <Dashboard
           movies={this.state.movies}
           games={this.state.games}

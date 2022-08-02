@@ -9,6 +9,7 @@ class Dashboard extends Component {
 
     return (
       <div>
+        {/* Navbar */}
         <Navbar />
 
         {/* Module 1 */}
