@@ -4,19 +4,23 @@ import { bootstrap } from "bootstrap";
 import Input from "./input";
 import * as userService from "../services/userService";
 
-class LoginForm extends Component {
+// username = React.createRef();
+// password = React.createRef();
+
+class SignupForm extends Component {
    state = {
-      account: { email: "", password: "", username: "" },
-      labels: { email: "Email", password: "Password", username: "Username" },
+      account: { username: "", password: "", name: "" },
+      labels: { username: "Email", password: "Password", name: "Name" },
    };
 
    //Handles form submission.
    handleSubmit = async (e) => {
       e.preventDefault(); //Prevents default behavior (submitting and reloading the whole page).
-      const response = await userService.loginUser(this.state.account);
-      localStorage.setItem("token", response.data); //Stores token in local storage
+      const response = await userService.registerUser(this.state.account);
+      console.log(response.data);
+
       // Resets fields.
-      const account = { password: "", username: "" };
+      const account = { username: "", password: "", name: "" };
       this.setState({ account });
    };
 
@@ -37,31 +41,39 @@ class LoginForm extends Component {
          <div className="text-center">
             {/* Navbar */}
             <Navbar />
-            {/* Login box */}
+            {/* Signup box */}
             <div className="container">
                <div className="row">
                   <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
                      <div className="card border-0 shadow rounded-3 my-5">
                         <div className="card-body p-4 p-sm-5">
                            <h5 className="card-title text-center mb-5 fw-light fs-5">
-                              Sign In Or
-                              <br />
+                              Sign Up Or <br />
                               <br />
                               <a
                                  className="signupLink"
-                                 href="/devsoftian.github.io/signup"
+                                 href="/devsoftian.github.io/"
                               >
-                                 Sign Up
+                                 Sign In
                               </a>
                            </h5>
-
                            <form onSubmit={this.handleSubmit}>
+                              <div className="form-floating mb-3">
+                                 {/* Username input */}
+                                 <Input
+                                    name="username"
+                                    label={labels.username}
+                                    formType="text"
+                                    value={account.username}
+                                    onChange={this.handleChange}
+                                 />
+                              </div>
                               {/* Name input */}
                               <Input
-                                 name="username"
-                                 label={labels.username}
+                                 name="name"
+                                 label={labels.name}
                                  formType="text"
-                                 value={account.username}
+                                 value={account.name}
                                  onChange={this.handleChange}
                               />
                               {/* Passphrase input */}
@@ -91,7 +103,7 @@ class LoginForm extends Component {
                               <div className="d-grid">
                                  <button
                                     onClick={this.onSubmit}
-                                    className="btn btn-primary btn-login text-uppercase fw-bold"
+                                    className="btn btn-primary btn-signup text-uppercase fw-bold"
                                     type="submit"
                                  >
                                     Submit
@@ -109,4 +121,4 @@ class LoginForm extends Component {
    }
 }
 
-export default LoginForm;
+export default SignupForm;

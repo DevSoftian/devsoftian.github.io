@@ -11,17 +11,22 @@ import reportWebVitals from "./reportWebVitals";
 import Navbar from "./components/navbar";
 import BugSleuth from "./components/bugSleuth";
 import LoginForm from "./components/loginForm";
+import SignupForm from "./components/signupForm";
 
 ReactDOM.render(
-  // Route Declarations
-  <BrowserRouter>
-    <Routes>
-      <Route path="/devsoftian.github.io/" element={<LoginForm />} />
-      <Route path="/devsoftian.github.io/bugsleuth/" element={<BugSleuth />} />
-      <Route path="/devsoftian.github.io/topolify/" element={<App />} />
-    </Routes>
-  </BrowserRouter>,
-  document.getElementById("root")
+   // Route Declarations
+   <BrowserRouter>
+      <Routes>
+         <Route path="/devsoftian.github.io/" element={<LoginForm />} />
+         <Route
+            path="/devsoftian.github.io/bugsleuth/"
+            element={<BugSleuth />}
+         />
+         <Route path="/devsoftian.github.io/topolify/" element={<App />} />
+         <Route path="/devsoftian.github.io/signup/" element={<SignupForm />} />
+      </Routes>
+   </BrowserRouter>,
+   document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
