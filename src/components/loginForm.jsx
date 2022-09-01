@@ -3,6 +3,7 @@ import Navbar from "./navbar";
 import { bootstrap } from "bootstrap";
 import Input from "./input";
 import * as userService from "../services/userService";
+import jwt_decode from "jwt-decode";
 
 class LoginForm extends Component {
    state = {
@@ -15,6 +16,7 @@ class LoginForm extends Component {
       e.preventDefault(); //Prevents default behavior (submitting and reloading the whole page).
       const response = await userService.loginUser(this.state.account);
       localStorage.setItem("token", response.data); //Stores token in local storage
+      const decodedJWT = this.decodeJWT(localStorage.token);
       // Resets fields.
       const account = { password: "", username: "" };
       this.setState({ account });
@@ -28,6 +30,12 @@ class LoginForm extends Component {
       account[input.name] = input.value;
       this.setState({ account, labels });
    };
+
+   decodeJWT(token) {
+      const decoded = jwt_decode(token);
+      console.log("Decoded JWT", decoded);
+      return decoded;
+   }
 
    render() {
       const { account, labels } = this.state;
