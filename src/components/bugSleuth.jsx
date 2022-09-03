@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import bootstrap from "bootstrap";
 import Navbar from "./navbar";
 import Module from "./module";
-import axios from "axios";
 import { getGames } from "../services/games";
 import { getServices } from "../services/serviceKeys";
 import config from "../config.json";
+import CRUD from "./CRUD";
 
 class BugSleuth extends Component {
    state = {
@@ -20,35 +20,35 @@ class BugSleuth extends Component {
             "x-auth-token": localStorage.token,
          },
       };
-      const { data: bugs } = await axios.get(
-         "http://141.136.42.108:15868/bugs/",
-         tokenHeader
-      );
+      const bugs = await CRUD.read(tokenHeader, config.apiEndpoint + "bugs/");
+      //    "http://141.136.42.108:15868/bugs/",
+      //    tokenHeader
+      // );
       this.setState({ bugs });
 
-      const { data: bugService } = await axios.get(
-         "http://141.136.42.108:15868/bugs/service/",
-         tokenHeader
+      const bugService = await CRUD.read(
+         tokenHeader,
+         config.apiEndpoint + "bugs/service/"
       );
       this.setState({ bugService });
 
-      const response = await axios.post(
-         config.apiEndpoint + "bugs/createbug",
-         {
-            key1: "Hey",
-            key2: "You",
-         },
-         tokenHeader
+      const createBug = {
+         key1: "Hey",
+         key2: "You",
+      };
+
+      const createResponse = CRUD.create(
+         tokenHeader,
+         createBug,
+         config.apiEndpoint + "bugs/createbug"
       );
    }
 
    render() {
-      // console.log("bugs" + Object.values(this.state.bugs));
-
       return (
          <div>
             <Navbar />
-
+            <button>Create New Bug</button>
             {/* Bug dashboard */}
             <Module
                className="md"
