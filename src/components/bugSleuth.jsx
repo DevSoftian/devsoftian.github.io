@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import bootstrap from "bootstrap";
 import Navbar from "./navbar";
 import Module from "./module";
 import { getGames } from "../services/games";
 import { getServices } from "../services/serviceKeys";
 import config from "../config.json";
 import CRUD from "./CRUD";
+import FormPop from "./FormPop";
 
 class BugSleuth extends Component {
    state = {
@@ -21,9 +21,6 @@ class BugSleuth extends Component {
          },
       };
       const bugs = await CRUD.read(tokenHeader, config.apiEndpoint + "bugs/");
-      //    "http://141.136.42.108:15868/bugs/",
-      //    tokenHeader
-      // );
       this.setState({ bugs });
 
       const bugService = await CRUD.read(
@@ -48,7 +45,31 @@ class BugSleuth extends Component {
       return (
          <div>
             <Navbar />
-            <button>Create New Bug</button>
+            <p>
+               <a
+                  class="btn btn-primary"
+                  data-bs-toggle="collapse"
+                  href="#collapseExample"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="collapseExample"
+               >
+                  Create New Bug
+               </a>
+               {/* <button
+                  class="btn btn-primary"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseExample"
+                  aria-expanded="false"
+                  aria-controls="collapseExample"
+               >
+                  Button with data-target
+               </button> */}
+            </p>
+            <div class="collapse in" id="collapseExample">
+               <FormPop></FormPop>
+            </div>
             {/* Bug dashboard */}
             <Module
                className="md"
