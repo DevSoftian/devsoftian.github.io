@@ -1,17 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import $ from "jquery";
-import Popper from "popper.js";
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import Navbar from "./components/navbar";
-import BugSleuth from "./components/bugSleuth";
-import LoginForm from "./components/loginForm";
-import SignupForm from "./components/signupForm";
+import BugSleuth from "./components/BugSleuth";
+import LoginForm from "./components/LoginForm";
+import SignupForm from "./components/SignupForm";
 
 ReactDOM.render(
    // Route Declarations

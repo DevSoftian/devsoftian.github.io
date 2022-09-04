@@ -1,11 +1,7 @@
 import React, { Component } from "react";
-import Navbar from "./navbar";
-import { bootstrap } from "bootstrap";
-import Input from "./input";
+import Navbar from "./Navbar";
+import Input from "./Input";
 import * as userService from "../services/userService";
-
-// username = React.createRef();
-// password = React.createRef();
 
 class SignupForm extends Component {
    state = {

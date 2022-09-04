@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import bootstrap from "bootstrap";
 
 class Module extends Component {
    //Maps each value in the "entry" object to a data cell up to an optional limit (numElements), and returns as an array of elements.

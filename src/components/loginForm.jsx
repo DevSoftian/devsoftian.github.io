@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import Navbar from "./navbar";
-import { bootstrap } from "bootstrap";
-import Input from "./input";
+import Navbar from "./Navbar";
+import Input from "./Input";
 import * as userService from "../services/userService";
 import jwt_decode from "jwt-decode";
 
@@ -39,7 +38,6 @@ class LoginForm extends Component {
 
    render() {
       const { account, labels } = this.state;
-      // const { labels } = this.state;
 
       return (
          <div className="text-center">
