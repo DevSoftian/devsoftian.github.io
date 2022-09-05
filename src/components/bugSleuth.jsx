@@ -7,10 +7,11 @@ import config from "../config.json";
 import CRUD from "./CRUD";
 import MinInput from "./MinInput";
 import "./bugSleuth.css";
+import BugModule from "./BugModule";
 
 class BugSleuth extends Component {
    state = {
-      account: { program: "", bugName: "", bugDesc: "" },
+      bugLog: { program: "", bugName: "", bugDesc: "" },
       labels: {
          program: "Program",
          bugName: "Bug Name",
@@ -23,25 +24,37 @@ class BugSleuth extends Component {
    //Handles form submission.
    handleSubmit = async (e) => {
       e.preventDefault(); //Prevents default behavior (submitting and reloading the whole page).
-      console.log("response");
+
+      const tokenHeader = {
+         headers: {
+            "x-auth-token": localStorage.token,
+         },
+      };
+
+      const createResponse = CRUD.create(
+         tokenHeader,
+         this.state.bugLog,
+         config.apiEndpoint + "bugs/createbug"
+      );
+      console.log("createBugForm", createResponse);
 
       // Resets fields.
-      const account = { program: "", bugName: "", bugDesc: "" };
+      const bugLog = { program: "", bugName: "", bugDesc: "" };
       const labels = {
          program: "Program",
          bugName: "Bug Name",
          bugDesc: "Bug Description",
       };
-      this.setState({ account, labels });
+      this.setState({ bugLog, labels });
    };
 
    //Handles input changes by updating the state and removes labels once a value is entered into the a field.
    handleChange = ({ currentTarget: input }) => {
-      const account = { ...this.state.account };
+      const bugLog = { ...this.state.bugLog };
       const labels = { ...this.state.labels };
       labels[input.name] = "";
-      account[input.name] = input.value;
-      this.setState({ account, labels });
+      bugLog[input.name] = input.value;
+      this.setState({ bugLog, labels });
    };
 
    async componentDidMount() {
@@ -59,27 +72,16 @@ class BugSleuth extends Component {
          config.apiEndpoint + "bugs/service/"
       );
       this.setState({ bugService });
-
-      const createBug = {
-         key1: "Hey",
-         key2: "You",
-      };
-
-      const createResponse = CRUD.create(
-         tokenHeader,
-         createBug,
-         config.apiEndpoint + "bugs/createbug"
-      );
    }
 
    render() {
-      const { account, labels } = this.state;
+      const { bugLog, labels } = this.state;
       return (
          <div>
             <Navbar />
             <p>
                <button
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseExample"
@@ -89,16 +91,16 @@ class BugSleuth extends Component {
                   Create New Bug
                </button>
             </p>
-            <div class="collapse" id="collapseExample">
-               <div class="card">
-                  <div class="card-body">
-                     <form onSubmit={this.handleSubmit}>
+            <div className="collapse" id="collapseExample">
+               <div className="card">
+                  <div className="card-body">
+                     <form onSubmit={this.handleSubmit} autocomplete="off">
                         <MinInput
                            className="shortInput"
                            name="program"
                            label={labels.program}
                            formType="text"
-                           value={account.program}
+                           value={bugLog.program}
                            onChange={this.handleChange}
                         />
                         <MinInput
@@ -106,7 +108,7 @@ class BugSleuth extends Component {
                            name="bugName"
                            label={labels.bugName}
                            formType="text"
-                           value={account.bugName}
+                           value={bugLog.bugName}
                            onChange={this.handleChange}
                         />
                         <div className="bugDesc">
@@ -115,7 +117,7 @@ class BugSleuth extends Component {
                               name="bugDesc"
                               aria-label="With textarea"
                               placeholder={labels.bugDesc}
-                              value={account.bugDesc}
+                              value={bugLog.bugDesc}
                               onChange={this.handleChange}
                            ></textarea>
                         </div>
@@ -135,11 +137,11 @@ class BugSleuth extends Component {
                </div>
             </div>
             {/* Bug dashboard */}
-            <Module
+            <BugModule
                className="md"
                module={this.state.bugs}
                service={this.state.bugService}
-            ></Module>
+            ></BugModule>
          </div>
       );
    }

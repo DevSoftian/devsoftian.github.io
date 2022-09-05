@@ -13,7 +13,6 @@ class SignupForm extends Component {
    handleSubmit = async (e) => {
       e.preventDefault(); //Prevents default behavior (submitting and reloading the whole page).
       const response = await userService.registerUser(this.state.account);
-      console.log(response.data);
 
       // Resets fields.
       const account = { username: "", password: "", name: "" };
