@@ -77,7 +77,7 @@ class BugSleuth extends Component {
    render() {
       const { bugLog, labels } = this.state;
       return (
-         <div>
+         <div className="mainPage">
             <Navbar />
             <p>
                <button

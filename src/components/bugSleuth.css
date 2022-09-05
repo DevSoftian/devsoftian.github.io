@@ -1,3 +1,13 @@
 .d-grid {
    margin-top: 20px;
 }
+
+.mainPage {
+   background: rgb(215, 214, 237);
+   background: linear-gradient(
+      270deg,
+      rgba(215, 214, 237, 0.5) 0%,
+      rgba(41, 41, 255, 0) 24%,
+      rgba(0, 212, 255, 0.2) 100%
+   );
+}

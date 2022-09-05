@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./bugModule.css";
 
 class BugModule extends Component {
    handleBug = (entry, elemBreak = 5) => {
@@ -64,7 +65,7 @@ class BugModule extends Component {
       let service = this.props.service;
       return (
          //Maps column titles from the "module" object and column data from the "service" object.
-         <div className="container-md">
+         <div className="container-fluid">
             <table className="table">
                <thead>
                   <tr>
