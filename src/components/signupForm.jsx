@@ -3,6 +3,8 @@ import Navbar from "./Navbar";
 import Input from "./Input";
 import * as userService from "../services/userService";
 
+//Signup page component
+
 class SignupForm extends Component {
    state = {
       account: { username: "", password: "", name: "" },

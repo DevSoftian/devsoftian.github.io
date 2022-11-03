@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+/*Navbar component
+
+         Navigates between Topotracker, Bugsleuth, and Login pages. */
 
 class Navbar extends Component {
    state = {};
@@ -7,9 +12,9 @@ class Navbar extends Component {
          //Navbar Declaration
          <React.StrictMode className="navbarMain">
             <nav className="navbar navbar-expand-lg navbar-light">
-               <a className="navbar-brand" href="#">
+               <Link className="navbar-brand" to="#">
                   Topolify
-               </a>
+               </Link>
                <button
                   className="navbar-toggler"
                   type="button"
@@ -29,27 +34,25 @@ class Navbar extends Component {
                >
                   <ul className="navbar-nav mr-auto">
                      <li className="nav-item active">
-                        <a className="nav-link" href="/devsoftian.github.io/">
+                        <Link className="nav-link" to="/devsoftian.github.io/">
                            Home
-                        </a>
+                        </Link>
                      </li>
                      <li className="nav-item">
-                        <a
+                        <Link
                            className="nav-link"
-                           href="/devsoftian.github.io/topolify/"
+                           to="/devsoftian.github.io/topolify/"
                         >
                            Topotracker
-                           {/* <span class
-                  Name="sr-only">(current)</span> This is a text indicating that this is the current location. */}
-                        </a>
+                        </Link>
                      </li>
                      <li className="nav-item">
-                        <a
+                        <Link
                            className="nav-link"
-                           href="/devsoftian.github.io/bugsleuth/"
+                           to="/devsoftian.github.io/bugsleuth/"
                         >
                            BugSleuth
-                        </a>
+                        </Link>
                      </li>
                   </ul>
                </div>

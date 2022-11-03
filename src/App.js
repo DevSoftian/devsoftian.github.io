@@ -32,21 +32,16 @@ class App extends Component {
       //   .catch((err) => {
       //     console.error(err);
       //   });
-
       // axios.put(config.apiEndpointapi + "/courses/1", {
       //   name: "James",
       // });
-
-      const { data: posts } = await http.get(
-         config.apiEndpoint + "api/courses/"
-      );
-      console.log(posts);
-
+      // const { data: posts } = await http.get(
+      //    config.apiEndpoint + "api/courses/"
+      // );
+      // console.log(posts);
       // const res = await axios.delete(config.apiEndpointapi + "/courses/1");
       // console.log(res);
-
       // const second = await axios.get(config.apiEndpointapi + "/courses/");
-
       // console.log(second);
    }
 

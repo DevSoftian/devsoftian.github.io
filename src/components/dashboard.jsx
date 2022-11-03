@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 import Module from "./Module";
 import Navbar from "./Navbar";
+
+//Topotracker Dashboard page
+
 class Dashboard extends Component {
    render() {
       let moduleNumber = 0; //PLaceholder modulenumber

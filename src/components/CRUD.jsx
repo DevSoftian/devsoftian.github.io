@@ -1,5 +1,7 @@
 import axios from "../services/httpService";
 
+//CRUD functionality
+
 async function read(tokenHeader, url) {
    const { data: response } = await axios.get(url, tokenHeader);
    // console.log(read, response);

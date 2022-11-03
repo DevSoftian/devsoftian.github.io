@@ -4,6 +4,10 @@ import Input from "./Input";
 import * as userService from "../services/userService";
 import jwt_decode from "jwt-decode";
 
+/*LoginForm page Component
+
+         Navbar component, form submission logic, input change logic.*/
+
 class LoginForm extends Component {
    state = {
       account: { email: "", password: "", username: "" },

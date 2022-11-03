@@ -9,6 +9,10 @@ import MinInput from "./MinInput";
 import "./bugSleuth.css";
 import BugModule from "./BugModule";
 
+/* BugSleuth dashboard page
+
+         Dashboard component with Create New Bug button (expandable) and BugModule component for displaying bug data. */
+
 class BugSleuth extends Component {
    state = {
       bugLog: { program: "", bugName: "", bugDesc: "" },
@@ -30,6 +34,8 @@ class BugSleuth extends Component {
             "x-auth-token": localStorage.token,
          },
       };
+
+      // console.log(this.state.bugLog);
 
       const createResponse = CRUD.create(
          tokenHeader,
@@ -57,6 +63,15 @@ class BugSleuth extends Component {
       this.setState({ bugLog, labels });
    };
 
+   handleSelect = (e) => {
+      console.log("handleSelect Triggered", e);
+      // const bugLog = { ...this.state.bugLog };
+      // const labels = { ...this.state.labels };
+      // labels[input.name] = "";
+      // bugLog[input.name] = input.value;
+      // this.setState({ bugLog, labels });
+   };
+
    async componentDidMount() {
       //Gets bug module (information titles) and service (actual bug information).
       const tokenHeader = {
@@ -65,6 +80,7 @@ class BugSleuth extends Component {
          },
       };
       const bugs = await CRUD.read(tokenHeader, config.apiEndpoint + "bugs/");
+
       this.setState({ bugs });
 
       const bugService = await CRUD.read(
@@ -94,7 +110,19 @@ class BugSleuth extends Component {
             <div className="collapse" id="collapseExample">
                <div className="card">
                   <div className="card-body">
-                     <form onSubmit={this.handleSubmit} autocomplete="off">
+                     <form onSubmit={this.handleSubmit} autoComplete="off">
+                        {/* <select
+                           class="form-select"
+                           name="program"
+                           aria-label="Default select example"
+                           label={labels.program}
+                           onSelect={this.handleSelect}
+                        >
+                           <option selected>Program</option>
+                           <option value="1">BugSleuth</option>
+                           <option value="2">Topotracker</option>
+                           <option value="3">Other</option>
+                        </select> */}
                         <MinInput
                            className="shortInput"
                            name="program"

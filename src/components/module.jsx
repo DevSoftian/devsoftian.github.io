@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+//Module component used in Topotracker dashboard
+
 class Module extends Component {
    //Maps each value in the "entry" object to a data cell up to an optional limit (numElements), and returns as an array of elements.
    mapSubElements = (entry, numElements = 5) => {
