@@ -1,32 +1,37 @@
 import React, { Component } from "react";
 import "./bugModule.css";
-import { Link } from "react-router-dom";
+import UpdateModal from "./UpdateModal";
 
 /*Bug data table display component
 
          Displays bug table data from the server (expandable dropdowns for each bug).*/
 
 class BugModule extends Component {
+   state = { isOpen: false };
+
    //Bug displaying function
 
    //Called in the body by service.map for each bug to display its data
    handleBug = (entry, elemBreak = 5) => {
       const id = "collapseExample" + entry.bug_id;
       const hashid = "#" + id;
-      // + entry.bug_id;
       const cells = [];
       cells.push(
          <>
             <tr>
+               {/*Modal Button*/}
                <button
                   type="button"
                   class="btn btn-primary"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
+                  databsentry={entry.bug_id}
+                  onClick={(e) => this.handleClick(entry, e)}
                >
                   Open
                </button>
                {this.mapSubElements(entry, elemBreak)}
+               {/*Details Button*/}
                <button
                   className="btn btn-primary"
                   type="button"
@@ -38,25 +43,22 @@ class BugModule extends Component {
                   Details
                </button>
             </tr>
+            {/*Second collpsible row elemnts*/}
             <tr className="collapse" id={id}>
                <th scope="row">Bug End</th>
                {this.mapSubElements(entry, elemBreak, elemBreak)}
             </tr>
          </>
       );
-
-      // cells.push(
-      //    <button
-      //       className="btn btn-primary"
-      //       type="button"
-      //       data-bs-toggle="collapse"
-      //       data-bs-target={id}
-      //       aria-expanded="false"
-      //       aria-controls="collapseExample"
-      //    ></button>
-      // );
-      // this.mapSubElements(entry);
       return cells;
+   };
+
+   handleClick = (args, e) => {
+      var exampleModal = document.getElementById("exampleModal");
+      var modalTitle = exampleModal.querySelector(".modal-title");
+      var modalBodyInput = exampleModal.querySelector(".modal-body");
+      modalTitle.textContent = "Update Bug - " + args.bug_id;
+      modalBodyInput.textContent = args.bugdesc;
    };
 
    mapSubElements = (entry, numElements = 4, startKey = 0) => {
@@ -75,47 +77,14 @@ class BugModule extends Component {
    };
 
    render() {
-      let module = Object.values(this.props.module);
+      let titles = Object.values(this.props.module);
       let service = this.props.service;
+      console.log(titles);
+
       return (
-         //Maps column titles from the "module" object and column data from the "service" object.
+         //Maps column titles from the "titles" object and column data from the "service" object.
          <div className="container-fluid">
-            <div
-               class="modal fade"
-               id="exampleModal"
-               tabindex="-1"
-               aria-labelledby="exampleModalLabel"
-               aria-hidden="true"
-            >
-               <div class="modal-dialog">
-                  <div class="modal-content">
-                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                           Modal title
-                        </h5>
-                        <button
-                           type="button"
-                           class="btn-close"
-                           data-bs-dismiss="modal"
-                           aria-label="Close"
-                        ></button>
-                     </div>
-                     <div class="modal-body">...</div>
-                     <div class="modal-footer">
-                        <button
-                           type="button"
-                           class="btn btn-secondary"
-                           data-bs-dismiss="modal"
-                        >
-                           Close
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                           Save changes
-                        </button>
-                     </div>
-                  </div>
-               </div>
-            </div>
+            <UpdateModal></UpdateModal>
             <table className="table">
                <thead>
                   <tr>
@@ -128,8 +97,8 @@ class BugModule extends Component {
                      <th className="col-1"></th>
                   </tr>
                   <tr>
-                     {module.map((moduleTitle) => (
-                        <th scope="col">{moduleTitle}</th>
+                     {titles.slice(0, 7).map((title) => (
+                        <th scope="col">{title}</th>
                      ))}
                   </tr>
                </thead>

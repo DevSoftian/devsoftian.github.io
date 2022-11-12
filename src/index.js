@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import React from "react";
+import React, { StrictMode } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -9,20 +9,32 @@ import reportWebVitals from "./reportWebVitals";
 import BugSleuth from "./components/BugSleuth";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
+import store from "./components/redux/store";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
    // Route Declarations
-   <BrowserRouter>
-      <Routes>
-         <Route path="/devsoftian.github.io/" element={<LoginForm />} />
-         <Route
-            path="/devsoftian.github.io/bugsleuth/"
-            element={<BugSleuth />}
-         />
-         <Route path="/devsoftian.github.io/topolify/" element={<App />} />
-         <Route path="/devsoftian.github.io/signup/" element={<SignupForm />} />
-      </Routes>
-   </BrowserRouter>,
+   <StrictMode>
+      <Provider store={store}>
+         <BrowserRouter>
+            <Routes>
+               <Route path="/devsoftian.github.io/" element={<LoginForm />} />
+               <Route
+                  path="/devsoftian.github.io/bugsleuth/"
+                  element={<BugSleuth />}
+               />
+               <Route
+                  path="/devsoftian.github.io/topolify/"
+                  element={<App />}
+               />
+               <Route
+                  path="/devsoftian.github.io/signup/"
+                  element={<SignupForm />}
+               />
+            </Routes>
+         </BrowserRouter>
+      </Provider>
+   </StrictMode>,
    document.getElementById("root")
 );
 
