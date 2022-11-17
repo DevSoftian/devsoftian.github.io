@@ -55,10 +55,22 @@ class BugModule extends Component {
 
    handleClick = (args, e) => {
       var exampleModal = document.getElementById("exampleModal");
-      var modalTitle = exampleModal.querySelector(".modal-title");
-      var modalBodyInput = exampleModal.querySelector(".modal-body");
-      modalTitle.textContent = "Update Bug - " + args.bug_id;
-      modalBodyInput.textContent = args.bugdesc;
+      let bugKeys = Object.keys(args);
+      bugKeys.forEach(function (key) {
+         console.log("key", key);
+         let bugPart = "." + key;
+         let textBox = exampleModal.querySelector(bugPart);
+         textBox.textContent = args[key];
+         console.log("text", args[key]);
+      });
+      // Object.keys(args).forEach((key) => {
+
+      // });
+
+      // var modalTitle = exampleModal.querySelector(".modal-title");
+      // var modalBodyInput = exampleModal.querySelector(".bugdesc");
+      // modalTitle.textContent = "Update Bug - " + args.bug_id;
+      // modalBodyInput.textContent = args.bugdesc;
    };
 
    mapSubElements = (entry, numElements = 4, startKey = 0) => {
@@ -79,7 +91,7 @@ class BugModule extends Component {
    render() {
       let titles = Object.values(this.props.module);
       let service = this.props.service;
-      console.log(titles);
+      console.log(titles, service);
 
       return (
          //Maps column titles from the "titles" object and column data from the "service" object.
