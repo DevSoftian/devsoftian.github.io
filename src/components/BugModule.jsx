@@ -53,17 +53,17 @@ class BugModule extends Component {
       return cells;
    };
 
-   handleClick = (args, e) => {
+   handleClick = (bug, e) => {
       var exampleModal = document.getElementById("exampleModal");
-      let bugKeys = Object.keys(args);
+      exampleModal.setAttribute("bugEdit", bug);
+      let bugKeys = Object.keys(bug).filter((element) => element != "bug_id");
       bugKeys.forEach(function (key) {
-         console.log("key", key);
-         let bugPart = "." + key;
+         let bugPart = "[moniker=" + key + "]";
          let textBox = exampleModal.querySelector(bugPart);
-         textBox.textContent = args[key];
-         console.log("text", args[key]);
+         textBox.setAttribute("placeholder", bug[key] == null ? "" : bug[key]);
       });
-      // Object.keys(args).forEach((key) => {
+
+      // Object.keys(bug).forEach((key) => {
 
       // });
 
@@ -91,12 +91,12 @@ class BugModule extends Component {
    render() {
       let titles = Object.values(this.props.module);
       let service = this.props.service;
-      console.log(titles, service);
+      let bugEdit = { bugname: "Not ready yet." };
 
       return (
          //Maps column titles from the "titles" object and column data from the "service" object.
          <div className="container-fluid">
-            <UpdateModal></UpdateModal>
+            <UpdateModal bugEdit={bugEdit}></UpdateModal>
             <table className="table">
                <thead>
                   <tr>

@@ -15,25 +15,20 @@ import { Provider } from "react-redux";
 ReactDOM.render(
    // Route Declarations
    <StrictMode>
-      <Provider store={store}>
-         <BrowserRouter>
-            <Routes>
-               <Route path="/devsoftian.github.io/" element={<LoginForm />} />
-               <Route
-                  path="/devsoftian.github.io/bugsleuth/"
-                  element={<BugSleuth />}
-               />
-               <Route
-                  path="/devsoftian.github.io/topolify/"
-                  element={<App />}
-               />
-               <Route
-                  path="/devsoftian.github.io/signup/"
-                  element={<SignupForm />}
-               />
-            </Routes>
-         </BrowserRouter>
-      </Provider>
+      <BrowserRouter>
+         <Routes>
+            <Route path="/devsoftian.github.io/" element={<LoginForm />} />
+            <Route
+               path="/devsoftian.github.io/bugsleuth/"
+               element={<BugSleuth />}
+            />
+            <Route path="/devsoftian.github.io/topolify/" element={<App />} />
+            <Route
+               path="/devsoftian.github.io/signup/"
+               element={<SignupForm />}
+            />
+         </Routes>
+      </BrowserRouter>
    </StrictMode>,
    document.getElementById("root")
 );

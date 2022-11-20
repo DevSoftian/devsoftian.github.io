@@ -10,7 +10,8 @@ import config from "./config.json";
 import http from "./services/httpService";
 import Dashboard from "./components/Dashboard";
 import axios from "axios";
-
+import { Provider } from "react-redux";
+import store from "./components/redux/store";
 class App extends Component {
    state = {
       games: getGames(),
@@ -47,17 +48,20 @@ class App extends Component {
 
    render() {
       return (
-         <React.Fragment>
-            {/* Toast container for potential error message. */}
-            <ToastContainer />
+         <Provider store={store}>
+            <React.Fragment>
+               {/* Toast container for potential error message. */}
+               <ToastContainer />
 
-            <Dashboard
-               movies={this.state.movies}
-               games={this.state.games}
-               projects={this.state.projects}
-               services={this.state.services}
-            ></Dashboard>
-         </React.Fragment>
+               <Dashboard
+                  movies={this.state.movies}
+                  games={this.state.games}
+                  projects={this.state.projects}
+                  services={this.state.services}
+               ></Dashboard>
+            </React.Fragment>
+            '
+         </Provider>
       );
    }
 }

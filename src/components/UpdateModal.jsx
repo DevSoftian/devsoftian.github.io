@@ -2,13 +2,126 @@ import React, { Component } from "react";
 import "./updateModal.css";
 
 class UpdateBug extends Component {
-   state = {};
+   state = {
+      bugObject: {
+         0: {
+            moniker: "bugname",
+            title: "Bug Name",
+            contents: "",
+            size: "sm",
+         },
+         1: {
+            moniker: "program_id",
+            title: "Program",
+            contents: "",
+            size: "sm",
+         },
+         2: {
+            moniker: "bugdesc",
+            title: "Description",
+            contents: "",
+            size: "lg",
+         },
+         3: {
+            moniker: "bugfixed",
+            title: "Status",
+            contents: "",
+            size: "sm",
+         },
+         4: {
+            moniker: "stepstaken",
+            title: "Steps Taken",
+            contents: "",
+            size: "lg",
+         },
+         5: {
+            moniker: "bugsolution",
+            title: "Solution",
+            contents: "",
+            size: "lg",
+         },
+         6: {
+            moniker: "bugstart",
+            title: "Start",
+            contents: "",
+            size: "sm",
+         },
+         7: {
+            moniker: "bugend",
+            title: "End",
+            contents: "",
+            size: "sm",
+         },
+         8: {
+            moniker: "bugresources",
+            title: "Resources",
+            contents: "",
+            size: "lg",
+         },
+      },
+      bugEdit: {},
+   };
+
+   // setBugEdit = (bug) => {
+   //    let bugEdit = bug;
+   //    this.setState({ bugEdit });
+   //    console.log("bugEdit after setState", this.state.bugEdit);
+   // };
 
    handleEdit = (currentTarget) => {
-      console.log("current target", currentTarget);
+      console.log("current target", currentTarget.target);
+      console.log(this.props.bugEdit);
+   };
+
+   onChangeInput = ({ currentTarget: input }) => {
+      console.log("input", input);
+      // const bugLog = { ...this.state.bugLog };
+      // const labels = { ...this.state.labels };
+      // labels[input.name] = "";
+      // bugLog[input.name] = input.value;
+      // this.setState({ bugLog, labels });
+   };
+
+   mapBug = (bugObject) => {
+      let cells = [];
+      for (let index = 0; index < Object.keys(bugObject).length; index++) {
+         let bugElement = bugObject[index];
+         cells.push(
+            <div className="clickableBox" onClick={this.handleEdit}>
+               <div className="titleist">{bugElement.title}</div>
+               <div className="input-group flex-wrap">
+                  {bugElement.size == "lg" ? (
+                     <textarea
+                        type="text-break"
+                        className="form-control"
+                        moniker={bugElement.moniker}
+                        value={bugElement.contents}
+                        onChange={this.onChangeInput}
+                        aria-label="Bug Description"
+                        aria-describedby="addon-wrapping"
+                     />
+                  ) : (
+                     <input
+                        type="text-break"
+                        className="form-control"
+                        moniker={bugElement.moniker}
+                        value={bugElement.contents}
+                        onChange={this.onChangeInput}
+                        aria-label="Bug Description"
+                        aria-describedby="addon-wrapping"
+                     />
+                  )}
+               </div>
+            </div>
+         );
+      }
+      return cells;
    };
 
    render() {
+      const { bugObject } = this.state;
+      const bug = {};
+      console.log("bugEdit on creation", this.props.bugedit);
       return (
          <div
             className="modal fade"
@@ -35,47 +148,7 @@ class UpdateBug extends Component {
                   {/*Modal Body*/}
                   <div className="modal-body">
                      <div className="container-fluid">
-                        <div className="clickableBox">
-                           <div className="titleist">Bug Name</div>
-                           <div className="bugname"></div>
-                        </div>
-
-                        <div className="clickableBox" onClick={this.handleEdit}>
-                           <div className="titleist">Description</div>
-                           <div className="bugdesc"></div>
-                        </div>
-
-                        <div className="clickableBox">
-                           <div className="titleist">Status</div>
-                           <div className="bugfixed"></div>
-                        </div>
-
-                        <div className="clickableBox">
-                           <div className="titleist">Start</div>
-                           <div className="bugstart"></div>
-                        </div>
-
-                        <div className="clickableBox">
-                           <div className="titleist">End</div>
-                           <div className="bugend"></div>
-                        </div>
-
-                        <div className="clickableBox">
-                           <div className="titleist">Resources</div>
-                           <div className="bugresources"></div>
-                        </div>
-                        <div className="clickableBox">
-                           <div className="titleist">Solution</div>
-                           <div className="bugsolution"></div>
-                        </div>
-                        <div className="clickableBox">
-                           <div className="titleist">Program</div>
-                           <div className="program_id"></div>
-                        </div>
-                        <div className="clickableBox">
-                           <div className="titleist">Steps Taken</div>
-                           <div className="stepstaken"></div>
-                        </div>
+                        {this.mapBug(bugObject)}
                      </div>
                   </div>
 
