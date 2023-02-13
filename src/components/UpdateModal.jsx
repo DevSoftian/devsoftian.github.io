@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import "./updateModal.css";
+import StoreAccess from "./StoreAccess";
+import { connect } from "react-redux";
+import { selectbug } from "./redux/bugs";
+import counter from "./redux/bugs";
 
 class UpdateBug extends Component {
    state = {
-      bugObject: {
+      bugStruct: {
          0: {
             moniker: "bugname",
             title: "Bug Name",
@@ -59,22 +63,22 @@ class UpdateBug extends Component {
             size: "lg",
          },
       },
-      bugEdit: {},
-   };
-
-   // setBugEdit = (bug) => {
-   //    let bugEdit = bug;
-   //    this.setState({ bugEdit });
-   //    console.log("bugEdit after setState", this.state.bugEdit);
-   // };
-
-   handleEdit = (currentTarget) => {
-      console.log("current target", currentTarget.target);
-      console.log(this.props.bugEdit);
+      bugedit: {
+         bugname: "",
+         program_id: "",
+         bugdesc: "",
+         bugfixed: "",
+         stepstaken: "",
+         bugsolution: "",
+         bugstart: "",
+         bugend: "",
+         bugresources: "",
+      },
    };
 
    onChangeInput = ({ currentTarget: input }) => {
       console.log("input", input);
+      console.log(this.props.passedbug);
       // const bugLog = { ...this.state.bugLog };
       // const labels = { ...this.state.labels };
       // labels[input.name] = "";
@@ -82,10 +86,10 @@ class UpdateBug extends Component {
       // this.setState({ bugLog, labels });
    };
 
-   mapBug = (bugObject) => {
+   mapBug = (bugStruct) => {
       let cells = [];
-      for (let index = 0; index < Object.keys(bugObject).length; index++) {
-         let bugElement = bugObject[index];
+      for (let index = 0; index < Object.keys(bugStruct).length; index++) {
+         let bugElement = bugStruct[index];
          cells.push(
             <div className="clickableBox" onClick={this.handleEdit}>
                <div className="titleist">{bugElement.title}</div>
@@ -93,6 +97,7 @@ class UpdateBug extends Component {
                   {bugElement.size == "lg" ? (
                      <textarea
                         type="text-break"
+                        contentEditable="true"
                         className="form-control"
                         moniker={bugElement.moniker}
                         value={bugElement.contents}
@@ -104,6 +109,7 @@ class UpdateBug extends Component {
                      <input
                         type="text-break"
                         className="form-control"
+                        contentEditable="true"
                         moniker={bugElement.moniker}
                         value={bugElement.contents}
                         onChange={this.onChangeInput}
@@ -119,9 +125,8 @@ class UpdateBug extends Component {
    };
 
    render() {
-      const { bugObject } = this.state;
-      const bug = {};
-      console.log("bugEdit on creation", this.props.bugedit);
+      const { bugStruct, bugedit } = this.state;
+      console.log("bugedit on creation", this.props);
       return (
          <div
             className="modal fade"
@@ -129,13 +134,14 @@ class UpdateBug extends Component {
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
+            bug_id="0"
          >
             <div className="modal-dialog modal-lg">
                <div className="modal-content">
                   {/*Modal Header*/}
                   <div className="modal-header">
                      <h5 className="bugheader" id="exampleModalLabel">
-                        Update Bug ID:
+                        Update Bug ID: {this.props.selectedBug}
                      </h5>
                      <h5 className="bug_id"></h5>
                      <button
@@ -145,10 +151,11 @@ class UpdateBug extends Component {
                         aria-label="Close"
                      ></button>
                   </div>
+                  <StoreAccess bug_id="0"></StoreAccess>
                   {/*Modal Body*/}
                   <div className="modal-body">
                      <div className="container-fluid">
-                        {this.mapBug(bugObject)}
+                        {this.mapBug(bugStruct)}
                      </div>
                   </div>
 
@@ -172,4 +179,8 @@ class UpdateBug extends Component {
    }
 }
 
-export default UpdateBug;
+const mapStateToProps = (state) => ({
+   selectedBug: state.counter.selectedBugNumber,
+});
+
+export default connect(mapStateToProps)(UpdateBug);

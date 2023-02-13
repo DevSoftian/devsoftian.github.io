@@ -5,6 +5,7 @@ const initialState = {
    value: 0,
    bugs: {},
    bugService: {},
+   selectedBugNumber: "ThisIsEmpty",
 };
 
 export const counterSlice = createSlice({
@@ -24,10 +25,29 @@ export const counterSlice = createSlice({
       incrementByAmount: (state, action) => {
          state.value += action.payload;
       },
+      loadBugs: (state, action) => {
+         state.bugs = action.payload;
+      },
+      changeBugToBeUpdated: (state, action) => {
+         state.selectedBugNumber = action.payload;
+         console.log("ChangeBugToBeUpdatedRun, Payload is ", action.payload);
+      },
+      selectBug: (state, action) => {
+         return state.bugService.filter(
+            (bug) => state.bug.bug_id === action.payload
+         );
+      },
    },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
+export const {
+   increment,
+   decrement,
+   incrementByAmount,
+   loadBugs,
+   changeBugToBeUpdated,
+   selectBug,
+} = counterSlice.actions;
 
 export default counterSlice.reducer;

@@ -8,6 +8,7 @@ import CRUD from "./CRUD";
 import MinInput from "./MinInput";
 import "./bugSleuth.css";
 import BugModule from "./BugModule";
+import StoreAccess from "./StoreAccess";
 
 /* BugSleuth dashboard page
 
@@ -92,6 +93,7 @@ class BugSleuth extends Component {
 
    render() {
       const { bugLog, labels } = this.state;
+      console.log("Bugsleuth bugs", this.state.bugs);
       return (
          <div className="mainPage">
             <Navbar />
@@ -106,6 +108,7 @@ class BugSleuth extends Component {
                >
                   Create New Bug
                </button>
+               {/* <StoreAccess bugs={this.state.bugs}></StoreAccess> */}
             </p>
             <div className="collapse" id="collapseExample">
                <div className="card">

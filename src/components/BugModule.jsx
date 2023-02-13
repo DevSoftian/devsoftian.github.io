@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import "./bugModule.css";
 import UpdateModal from "./UpdateModal";
+import { useDispatch } from "react-redux";
+import { changeBugToBeUpdated } from "./redux/bugs";
+import ReduxChangeWrapper from "./ReduxChangeWrapper";
+import { connect } from "react-redux";
 
 /*Bug data table display component
 
@@ -26,7 +30,7 @@ class BugModule extends Component {
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
                   databsentry={entry.bug_id}
-                  onClick={(e) => this.handleClick(entry, e)}
+                  onClick={(e) => this.handleModalClick(entry, e)}
                >
                   Open
                </button>
@@ -53,24 +57,18 @@ class BugModule extends Component {
       return cells;
    };
 
-   handleClick = (bug, e) => {
+   handleModalClick = (bug) => {
+      console.log("ModalClick Bug", bug);
       var exampleModal = document.getElementById("exampleModal");
-      exampleModal.setAttribute("bugEdit", bug);
-      let bugKeys = Object.keys(bug).filter((element) => element != "bug_id");
-      bugKeys.forEach(function (key) {
-         let bugPart = "[moniker=" + key + "]";
-         let textBox = exampleModal.querySelector(bugPart);
-         textBox.setAttribute("placeholder", bug[key] == null ? "" : bug[key]);
-      });
+      // console.log("bugeditprop", exampleModal);
+      // console.log("bugedit Props", exampleModal.children);
 
-      // Object.keys(bug).forEach((key) => {
-
+      // let bugKeys = Object.keys(bug).filter((element) => element != "bug_id");
+      // bugKeys.forEach(function (key) {
+      //    let bugPart = "[moniker=" + key + "]";
+      //    let textBox = exampleModal.querySelector(bugPart);
+      //    textBox.setAttribute("placeholder", bug[key] == null ? "" : bug[key]);
       // });
-
-      // var modalTitle = exampleModal.querySelector(".modal-title");
-      // var modalBodyInput = exampleModal.querySelector(".bugdesc");
-      // modalTitle.textContent = "Update Bug - " + args.bug_id;
-      // modalBodyInput.textContent = args.bugdesc;
    };
 
    mapSubElements = (entry, numElements = 4, startKey = 0) => {
@@ -91,12 +89,12 @@ class BugModule extends Component {
    render() {
       let titles = Object.values(this.props.module);
       let service = this.props.service;
-      let bugEdit = { bugname: "Not ready yet." };
+      let bugedit2 = { bugname: "Not ready yet." };
 
       return (
          //Maps column titles from the "titles" object and column data from the "service" object.
          <div className="container-fluid">
-            <UpdateModal bugEdit={bugEdit}></UpdateModal>
+            <UpdateModal bugeditprop={bugedit2}></UpdateModal>
             <table className="table">
                <thead>
                   <tr>
