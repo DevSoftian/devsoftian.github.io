@@ -59,7 +59,8 @@ class BugModule extends Component {
 
    handleModalClick = (bug) => {
       console.log("ModalClick Bug", bug);
-      var exampleModal = document.getElementById("exampleModal");
+      this.props.changeBugToBeUpdated(bug);
+      // var exampleModal = document.getElementById("exampleModal");
       // console.log("bugeditprop", exampleModal);
       // console.log("bugedit Props", exampleModal.children);
 
@@ -89,12 +90,37 @@ class BugModule extends Component {
    render() {
       let titles = Object.values(this.props.module);
       let service = this.props.service;
-      let bugedit2 = { bugname: "Not ready yet." };
+      let bugedit2 = service;
+      let something = this.props.selectedBugNumber.bug_id;
 
       return (
          //Maps column titles from the "titles" object and column data from the "service" object.
          <div className="container-fluid">
-            <UpdateModal bugeditprop={bugedit2}></UpdateModal>
+            <div>
+               <h1>Selected Bug {something}</h1>
+               {/* <button
+                  onClick={() => {
+                     console.log("Count before increment", something);
+                     this.props.changeBugToBeUpdated("8");
+                     console.log("Count after increment", something);
+                  }}
+               >
+                  Increment Count
+               </button>
+               <button
+                  onClick={() => {
+                     console.log("Count before increment", something);
+                     this.props.changeBugToBeUpdated("24");
+                     console.log("Count after increment", something);
+                  }}
+               >
+                  Decrement Count
+               </button> */}
+               ;
+            </div>
+            <UpdateModal
+               bugeditprops={this.props.selectedBugNumber}
+            ></UpdateModal>
             <table className="table">
                <thead>
                   <tr>
@@ -119,4 +145,10 @@ class BugModule extends Component {
    }
 }
 
-export default BugModule;
+const mapStateToProps = (state) => ({
+   selectedBugNumber: state.counter.selectedBugNumber,
+});
+
+const mapDispatchToProps = { changeBugToBeUpdated };
+
+export default connect(mapStateToProps, mapDispatchToProps)(BugModule);

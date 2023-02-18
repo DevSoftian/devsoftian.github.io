@@ -5,8 +5,9 @@ import { connect } from "react-redux";
 import { selectbug } from "./redux/bugs";
 import counter from "./redux/bugs";
 
-class UpdateBug extends Component {
+class UpdateModal extends Component {
    state = {
+      selectedBugNumber: "0",
       bugStruct: {
          0: {
             moniker: "bugname",
@@ -78,7 +79,7 @@ class UpdateBug extends Component {
 
    onChangeInput = ({ currentTarget: input }) => {
       console.log("input", input);
-      console.log(this.props.passedbug);
+      console.log("Modal props", this.props);
       // const bugLog = { ...this.state.bugLog };
       // const labels = { ...this.state.labels };
       // labels[input.name] = "";
@@ -97,7 +98,7 @@ class UpdateBug extends Component {
                   {bugElement.size == "lg" ? (
                      <textarea
                         type="text-break"
-                        contentEditable="true"
+                        // contentEditable="true"
                         className="form-control"
                         moniker={bugElement.moniker}
                         value={bugElement.contents}
@@ -109,7 +110,7 @@ class UpdateBug extends Component {
                      <input
                         type="text-break"
                         className="form-control"
-                        contentEditable="true"
+                        // contentEditable="true"
                         moniker={bugElement.moniker}
                         value={bugElement.contents}
                         onChange={this.onChangeInput}
@@ -125,13 +126,13 @@ class UpdateBug extends Component {
    };
 
    render() {
-      const { bugStruct, bugedit } = this.state;
+      const { bugStruct, bugedit, selectedBugNumber } = this.state;
       console.log("bugedit on creation", this.props);
       return (
          <div
             className="modal fade"
             id="exampleModal"
-            tabindex="-1"
+            tabIndex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
             bug_id="0"
@@ -141,7 +142,7 @@ class UpdateBug extends Component {
                   {/*Modal Header*/}
                   <div className="modal-header">
                      <h5 className="bugheader" id="exampleModalLabel">
-                        Update Bug ID: {this.props.selectedBug}
+                        Update Bug ID: {this.props.selectedBug.bug_id}
                      </h5>
                      <h5 className="bug_id"></h5>
                      <button
@@ -183,4 +184,4 @@ const mapStateToProps = (state) => ({
    selectedBug: state.counter.selectedBugNumber,
 });
 
-export default connect(mapStateToProps)(UpdateBug);
+export default connect(mapStateToProps)(UpdateModal);

@@ -93,7 +93,7 @@ class BugSleuth extends Component {
 
    render() {
       const { bugLog, labels } = this.state;
-      console.log("Bugsleuth bugs", this.state.bugs);
+      // console.log("Bugsleuth bugs", this.state.bugs);
       return (
          <div className="mainPage">
             <Navbar />
