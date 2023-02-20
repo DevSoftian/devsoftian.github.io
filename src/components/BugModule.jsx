@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import "./bugModule.css";
 import UpdateModal from "./UpdateModal";
-import { useDispatch } from "react-redux";
 import { changeBugToBeUpdated } from "./redux/bugs";
-import ReduxChangeWrapper from "./ReduxChangeWrapper";
 import { connect } from "react-redux";
 
 /*Bug data table display component
@@ -58,9 +56,7 @@ class BugModule extends Component {
    };
 
    handleModalClick = (bug) => {
-      console.log("ModalClick Bug", bug);
       this.props.changeBugToBeUpdated(bug);
-      // var exampleModal = document.getElementById("exampleModal");
       // console.log("bugeditprop", exampleModal);
       // console.log("bugedit Props", exampleModal.children);
 
@@ -90,37 +86,15 @@ class BugModule extends Component {
    render() {
       let titles = Object.values(this.props.module);
       let service = this.props.service;
-      let bugedit2 = service;
-      let something = this.props.selectedBugNumber.bug_id;
+      let selectedBug = this.props.selectedBug.bug_id;
 
       return (
          //Maps column titles from the "titles" object and column data from the "service" object.
          <div className="container-fluid">
             <div>
-               <h1>Selected Bug {something}</h1>
-               {/* <button
-                  onClick={() => {
-                     console.log("Count before increment", something);
-                     this.props.changeBugToBeUpdated("8");
-                     console.log("Count after increment", something);
-                  }}
-               >
-                  Increment Count
-               </button>
-               <button
-                  onClick={() => {
-                     console.log("Count before increment", something);
-                     this.props.changeBugToBeUpdated("24");
-                     console.log("Count after increment", something);
-                  }}
-               >
-                  Decrement Count
-               </button> */}
-               ;
+               <h1>Selected Bug {selectedBug}</h1>;
             </div>
-            <UpdateModal
-               bugeditprops={this.props.selectedBugNumber}
-            ></UpdateModal>
+            <UpdateModal bugeditprops={this.props.selectedBug}></UpdateModal>
             <table className="table">
                <thead>
                   <tr>
@@ -146,7 +120,7 @@ class BugModule extends Component {
 }
 
 const mapStateToProps = (state) => ({
-   selectedBugNumber: state.counter.selectedBugNumber,
+   selectedBug: state.counter.selectedBug,
 });
 
 const mapDispatchToProps = { changeBugToBeUpdated };

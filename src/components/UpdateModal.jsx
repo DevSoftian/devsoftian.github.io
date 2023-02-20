@@ -1,13 +1,9 @@
 import React, { Component } from "react";
 import "./updateModal.css";
-import StoreAccess from "./StoreAccess";
 import { connect } from "react-redux";
-import { selectbug } from "./redux/bugs";
-import counter from "./redux/bugs";
 
 class UpdateModal extends Component {
    state = {
-      selectedBugNumber: "0",
       bugStruct: {
          0: {
             moniker: "bugname",
@@ -66,25 +62,23 @@ class UpdateModal extends Component {
       },
       bugedit: {
          bugname: "",
-         program_id: "",
          bugdesc: "",
+         program_id: "",
          bugfixed: "",
-         stepstaken: "",
-         bugsolution: "",
          bugstart: "",
          bugend: "",
          bugresources: "",
+         bugsolution: "",
+         stepstaken: "",
       },
    };
 
    onChangeInput = ({ currentTarget: input }) => {
-      console.log("input", input);
-      console.log("Modal props", this.props);
-      // const bugLog = { ...this.state.bugLog };
-      // const labels = { ...this.state.labels };
-      // labels[input.name] = "";
-      // bugLog[input.name] = input.value;
-      // this.setState({ bugLog, labels });
+      const bugLog = { ...this.state.bugLog };
+      const labels = { ...this.state.labels };
+      labels[input.moniker] = "";
+      bugLog[input.moniker] = input.value;
+      this.setState({ bugLog, labels });
    };
 
    mapBug = (bugStruct) => {
@@ -98,10 +92,10 @@ class UpdateModal extends Component {
                   {bugElement.size == "lg" ? (
                      <textarea
                         type="text-break"
-                        // contentEditable="true"
+                        contentEditable="true"
                         className="form-control"
                         moniker={bugElement.moniker}
-                        value={bugElement.contents}
+                        value={this.props.selectedBug[bugElement.moniker]}
                         onChange={this.onChangeInput}
                         aria-label="Bug Description"
                         aria-describedby="addon-wrapping"
@@ -110,9 +104,9 @@ class UpdateModal extends Component {
                      <input
                         type="text-break"
                         className="form-control"
-                        // contentEditable="true"
+                        contentEditable="true"
                         moniker={bugElement.moniker}
-                        value={bugElement.contents}
+                        value={this.props.selectedBug[bugElement.moniker]}
                         onChange={this.onChangeInput}
                         aria-label="Bug Description"
                         aria-describedby="addon-wrapping"
@@ -126,8 +120,7 @@ class UpdateModal extends Component {
    };
 
    render() {
-      const { bugStruct, bugedit, selectedBugNumber } = this.state;
-      console.log("bugedit on creation", this.props);
+      const { bugStruct, bugedit, selectedBug } = this.state;
       return (
          <div
             className="modal fade"
@@ -141,9 +134,9 @@ class UpdateModal extends Component {
                <div className="modal-content">
                   {/*Modal Header*/}
                   <div className="modal-header">
-                     <h5 className="bugheader" id="exampleModalLabel">
-                        Update Bug ID: {this.props.selectedBug.bug_id}
-                     </h5>
+                     <h3 className="bugheader" id="exampleModalLabel">
+                        Bug ID: {this.props.selectedBug.bug_id}
+                     </h3>
                      <h5 className="bug_id"></h5>
                      <button
                         type="button"
@@ -152,7 +145,6 @@ class UpdateModal extends Component {
                         aria-label="Close"
                      ></button>
                   </div>
-                  <StoreAccess bug_id="0"></StoreAccess>
                   {/*Modal Body*/}
                   <div className="modal-body">
                      <div className="container-fluid">
@@ -181,7 +173,7 @@ class UpdateModal extends Component {
 }
 
 const mapStateToProps = (state) => ({
-   selectedBug: state.counter.selectedBugNumber,
+   selectedBug: state.counter.selectedBug,
 });
 
 export default connect(mapStateToProps)(UpdateModal);

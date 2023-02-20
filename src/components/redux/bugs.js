@@ -5,7 +5,7 @@ const initialState = {
    value: 0,
    bugs: {},
    bugService: {},
-   selectedBugNumber: "ThisIsEmpty",
+   selectedBug: "ThisIsEmpty",
 };
 
 export const counterSlice = createSlice({
@@ -29,8 +29,7 @@ export const counterSlice = createSlice({
          state.bugs = action.payload;
       },
       changeBugToBeUpdated: (state, action) => {
-         state.selectedBugNumber = action.payload;
-         console.log("ChangeBugToBeUpdatedRun, Payload is ", action.payload);
+         state.selectedBug = action.payload;
       },
       selectBug: (state, action) => {
          return state.bugService.filter(
