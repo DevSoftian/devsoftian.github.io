@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import EditableTextSm from "./EditableTextSm";
 import EditableTextLg from "./EditableTextLg";
 import DateTimeElement from "./DateTimeElement";
+import DropdownElement from "./DropdownElement";
 
 class UpdateModal extends Component {
    state = {
@@ -19,7 +20,7 @@ class UpdateModal extends Component {
             moniker: "program_id",
             title: "Program",
             contents: "",
-            bugElementType: "sm",
+            bugElementType: "program-dropdown",
             lines: 1,
          },
          2: {
@@ -33,7 +34,7 @@ class UpdateModal extends Component {
             moniker: "bugfixed",
             title: "Status",
             contents: "",
-            bugElementType: "sm",
+            bugElementType: "bugfixed-dropdown",
             lines: 1,
          },
          4: {
@@ -83,6 +84,8 @@ class UpdateModal extends Component {
          bugsolution: "",
          stepstaken: "",
       },
+      programItems: ["Topotracker", "BugSleuth", "BlogApp"],
+      bugFixedItems: ["ASSIGNED", "LOGGED", "RESOLVED"],
    };
 
    onChangeInput = ({ currentTarget: input }) => {
@@ -131,6 +134,22 @@ class UpdateModal extends Component {
                moniker={bugElement.moniker}
                value={this.props.selectedBug[bugElement.moniker]}
             ></DateTimeElement>
+         );
+      else if (bugElement.bugElementType == "program-dropdown")
+         return (
+            <DropdownElement
+               moniker={bugElement.moniker}
+               value={this.props.selectedBug[bugElement.moniker]}
+               itemList={this.state.programItems}
+            ></DropdownElement>
+         );
+      else if (bugElement.bugElementType == "bugfixed-dropdown")
+         return (
+            <DropdownElement
+               moniker={bugElement.moniker}
+               value={this.props.selectedBug[bugElement.moniker]}
+               itemList={this.state.bugFixedItems}
+            ></DropdownElement>
          );
    }
 
