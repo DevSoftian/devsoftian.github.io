@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./updateModal.css";
 import { connect } from "react-redux";
+import EditableTextSm from "./EditableTextSm";
+import EditableTextLg from "./EditableTextLg";
 
 class UpdateModal extends Component {
    state = {
@@ -9,55 +11,64 @@ class UpdateModal extends Component {
             moniker: "bugname",
             title: "Bug Name",
             contents: "",
-            size: "sm",
+            bugElementType: "sm",
+            lines: 1,
          },
          1: {
             moniker: "program_id",
             title: "Program",
             contents: "",
-            size: "sm",
+            bugElementType: "sm",
+            lines: 1,
          },
          2: {
             moniker: "bugdesc",
             title: "Description",
             contents: "",
-            size: "lg",
+            bugElementType: "lg",
+            lines: 5,
          },
          3: {
             moniker: "bugfixed",
             title: "Status",
             contents: "",
-            size: "sm",
+            bugElementType: "sm",
+            lines: 1,
          },
          4: {
             moniker: "stepstaken",
             title: "Steps Taken",
             contents: "",
-            size: "lg",
+            bugElementType: "lg",
+            lines: 3,
          },
          5: {
             moniker: "bugsolution",
             title: "Solution",
             contents: "",
-            size: "lg",
+            bugElementType: "lg",
+            lines: 3,
          },
          6: {
             moniker: "bugstart",
             title: "Start",
             contents: "",
-            size: "sm",
+            bugElementType: "sm",
+            lines: 1,
          },
          7: {
             moniker: "bugend",
             title: "End",
             contents: "",
-            size: "sm",
+            bugElementType: "sm",
+            lines: 1,
          },
          8: {
             moniker: "bugresources",
             title: "Resources",
             contents: "",
-            size: "lg",
+            bugElementType: "lg",
+            lines: 3,
          },
       },
       bugedit: {
@@ -89,35 +100,31 @@ class UpdateModal extends Component {
             <div className="clickableBox" onClick={this.handleEdit}>
                <div className="titleist">{bugElement.title}</div>
                <div className="input-group flex-wrap">
-                  {bugElement.size == "lg" ? (
-                     <textarea
-                        type="text-break"
-                        contentEditable="true"
-                        className="form-control"
-                        moniker={bugElement.moniker}
-                        value={this.props.selectedBug[bugElement.moniker]}
-                        onChange={this.onChangeInput}
-                        aria-label="Bug Description"
-                        aria-describedby="addon-wrapping"
-                     />
-                  ) : (
-                     <input
-                        type="text-break"
-                        className="form-control"
-                        contentEditable="true"
-                        moniker={bugElement.moniker}
-                        value={this.props.selectedBug[bugElement.moniker]}
-                        onChange={this.onChangeInput}
-                        aria-label="Bug Description"
-                        aria-describedby="addon-wrapping"
-                     />
-                  )}
+                  {this.handleBugElement(bugElement)}
                </div>
             </div>
          );
       }
       return cells;
    };
+
+   handleBugElement(bugElement) {
+      if (bugElement.bugElementType == "lg")
+         return (
+            <EditableTextLg
+               moniker={bugElement.moniker}
+               value={this.props.selectedBug[bugElement.moniker]}
+               lines={bugElement.lines}
+            ></EditableTextLg>
+         );
+      else if (bugElement.bugElementType == "sm")
+         return (
+            <EditableTextSm
+               moniker={bugElement.moniker}
+               value={this.props.selectedBug[bugElement.moniker]}
+            ></EditableTextSm>
+         );
+   }
 
    render() {
       const { bugStruct, bugedit, selectedBug } = this.state;
