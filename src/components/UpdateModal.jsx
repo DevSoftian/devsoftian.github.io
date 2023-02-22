@@ -3,6 +3,7 @@ import "./updateModal.css";
 import { connect } from "react-redux";
 import EditableTextSm from "./EditableTextSm";
 import EditableTextLg from "./EditableTextLg";
+import DateTimeElement from "./DateTimeElement";
 
 class UpdateModal extends Component {
    state = {
@@ -53,14 +54,14 @@ class UpdateModal extends Component {
             moniker: "bugstart",
             title: "Start",
             contents: "",
-            bugElementType: "sm",
+            bugElementType: "datetime",
             lines: 1,
          },
          7: {
             moniker: "bugend",
             title: "End",
             contents: "",
-            bugElementType: "sm",
+            bugElementType: "datetime",
             lines: 1,
          },
          8: {
@@ -123,6 +124,13 @@ class UpdateModal extends Component {
                moniker={bugElement.moniker}
                value={this.props.selectedBug[bugElement.moniker]}
             ></EditableTextSm>
+         );
+      else if (bugElement.bugElementType == "datetime")
+         return (
+            <DateTimeElement
+               moniker={bugElement.moniker}
+               value={this.props.selectedBug[bugElement.moniker]}
+            ></DateTimeElement>
          );
    }
 
