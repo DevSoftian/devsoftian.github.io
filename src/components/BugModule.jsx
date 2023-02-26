@@ -57,15 +57,6 @@ class BugModule extends Component {
 
    handleModalClick = (bug) => {
       this.props.changeBugToBeUpdated(bug);
-      // console.log("bugeditprop", exampleModal);
-      // console.log("bugedit Props", exampleModal.children);
-
-      // let bugKeys = Object.keys(bug).filter((element) => element != "bug_id");
-      // bugKeys.forEach(function (key) {
-      //    let bugPart = "[moniker=" + key + "]";
-      //    let textBox = exampleModal.querySelector(bugPart);
-      //    textBox.setAttribute("placeholder", bug[key] == null ? "" : bug[key]);
-      // });
    };
 
    mapSubElements = (entry, numElements = 4, startKey = 0) => {
@@ -91,9 +82,6 @@ class BugModule extends Component {
       return (
          //Maps column titles from the "titles" object and column data from the "service" object.
          <div className="container-fluid">
-            <div>
-               <h1>Selected Bug {selectedBug}</h1>;
-            </div>
             <UpdateModal bugeditprops={this.props.selectedBug}></UpdateModal>
             <table className="table">
                <thead>

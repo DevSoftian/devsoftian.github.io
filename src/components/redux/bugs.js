@@ -30,7 +30,7 @@ export const counterSlice = createSlice({
       },
       changeBugToBeUpdated: (state, action) => {
          state.selectedBug = action.payload;
-         console.log("Selected Bug", state.selectedBug);
+         console.log("Selected Bug updated", state.selectedBug);
       },
       selectBug: (state, action) => {
          return state.bugService.filter(

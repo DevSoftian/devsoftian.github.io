@@ -5,7 +5,12 @@ import "react-edit-text/dist/index.css";
 export default function EditableTextSm(props) {
    return (
       <React.Fragment>
-         <EditText name="textboxsm" defaultValue={props.value} />
+         <EditText
+            name={props.moniker}
+            onSave={props.onSave}
+            rows={props.lines}
+            defaultValue={props.value}
+         />
       </React.Fragment>
    );
 }

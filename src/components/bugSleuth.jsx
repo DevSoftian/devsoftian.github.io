@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
-import Module from "./Module";
 import { getGames } from "../services/games";
 import { getServices } from "../services/serviceKeys";
 import config from "../config.json";
@@ -8,7 +7,6 @@ import CRUD from "./CRUD";
 import MinInput from "./MinInput";
 import "./bugSleuth.css";
 import BugModule from "./BugModule";
-import StoreAccess from "./StoreAccess";
 
 /* BugSleuth dashboard page
 

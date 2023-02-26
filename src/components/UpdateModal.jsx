@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import "./updateModal.css";
 import { connect } from "react-redux";
+import "react-edit-text/dist/index.css";
 import EditableTextSm from "./EditableTextSm";
 import EditableTextLg from "./EditableTextLg";
 import DateTimeElement from "./DateTimeElement";
 import DropdownElement from "./DropdownElement";
+import CRUD from "./CRUD";
+import config from "../config.json";
 
 class UpdateModal extends Component {
    state = {
@@ -73,7 +76,8 @@ class UpdateModal extends Component {
             lines: 3,
          },
       },
-      bugedit: {
+      bugEdit: {
+         bug_id: "",
          bugname: "",
          bugdesc: "",
          program_id: "",
@@ -84,17 +88,17 @@ class UpdateModal extends Component {
          bugsolution: "",
          stepstaken: "",
       },
-      programItems: ["Topotracker", "BugSleuth", "BlogApp"],
+      programItems: ["Topotracker", "BugSleuth", "Blog App"],
       bugFixedItems: ["ASSIGNED", "LOGGED", "RESOLVED"],
    };
 
-   onChangeInput = ({ currentTarget: input }) => {
-      const bugLog = { ...this.state.bugLog };
-      const labels = { ...this.state.labels };
-      labels[input.moniker] = "";
-      bugLog[input.moniker] = input.value;
-      this.setState({ bugLog, labels });
-   };
+   // onChangeInput = ({ currentTarget: input }) => {
+   //    const bugLog = { ...this.state.bugLog };
+   //    const labels = { ...this.state.labels };
+   //    labels[input.moniker] = "";
+   //    bugLog[input.moniker] = input.value;
+   //    this.setState({ bugLog, labels });
+   // };
 
    mapBug = (bugStruct) => {
       let cells = [];
@@ -112,49 +116,99 @@ class UpdateModal extends Component {
       return cells;
    };
 
+   handleSave = ({ name, value, previousValue }) => {
+      const { bugEdit } = this.state;
+      console.log("name", name);
+      console.log("value", value);
+      console.log("previousValue", previousValue, this);
+      bugEdit[name] = value;
+      console.log("bugEdit after change", bugEdit);
+   };
+
+   handleSaveChanges = async (e) => {
+      e.preventDefault();
+
+      const tokenHeader = {
+         headers: {
+            "x-auth-token": localStorage.token,
+         },
+      };
+
+      // console.log(this.state.bugLog);
+
+      const updateResponse = CRUD.update(
+         tokenHeader,
+         this.state.bugEdit,
+         config.apiEndpoint + "bugs/createbug"
+      );
+      console.log("Bug Update Report", updateResponse);
+
+      this.state.bugEdit.bugend =
+         document.getElementById("bugend-element").value;
+      this.state.bugEdit.bugstart =
+         document.getElementById("bugstart-element").value;
+      this.state.bugEdit.bugfixed =
+         document.getElementById("bugfixed-element").value;
+      this.state.bugEdit.program_id =
+         document.getElementById("program_id-element").value;
+
+      console.log("savedChangesBugEdit", this.state.bugEdit);
+   };
+
    handleBugElement(bugElement) {
-      if (bugElement.bugElementType == "lg")
+      if (bugElement.bugElementType === "lg")
          return (
             <EditableTextLg
                moniker={bugElement.moniker}
                value={this.props.selectedBug[bugElement.moniker]}
                lines={bugElement.lines}
+               onSave={this.handleSave}
             ></EditableTextLg>
          );
-      else if (bugElement.bugElementType == "sm")
+      else if (bugElement.bugElementType === "sm")
          return (
             <EditableTextSm
                moniker={bugElement.moniker}
                value={this.props.selectedBug[bugElement.moniker]}
+               lines={bugElement.lines}
+               onSave={this.handleSave}
             ></EditableTextSm>
          );
-      else if (bugElement.bugElementType == "datetime")
+      else if (bugElement.bugElementType === "datetime")
          return (
             <DateTimeElement
                moniker={bugElement.moniker}
                value={this.props.selectedBug[bugElement.moniker]}
+               lines={bugElement.lines}
+               onSave={this.handleSave}
             ></DateTimeElement>
          );
-      else if (bugElement.bugElementType == "program-dropdown")
+      else if (bugElement.bugElementType === "program-dropdown")
          return (
             <DropdownElement
                moniker={bugElement.moniker}
                value={this.props.selectedBug[bugElement.moniker]}
+               lines={bugElement.lines}
                itemList={this.state.programItems}
             ></DropdownElement>
          );
-      else if (bugElement.bugElementType == "bugfixed-dropdown")
+      else if (bugElement.bugElementType === "bugfixed-dropdown")
          return (
             <DropdownElement
                moniker={bugElement.moniker}
                value={this.props.selectedBug[bugElement.moniker]}
                itemList={this.state.bugFixedItems}
+               lines={bugElement.lines}
             ></DropdownElement>
          );
    }
 
    render() {
-      const { bugStruct, bugedit, selectedBug } = this.state;
+      const { bugStruct, bugEdit } = this.state;
+      const selectedBug = this.props.selectedBug;
+      for (let key of Object.keys(bugEdit)) {
+         bugEdit[key] = selectedBug[key];
+      }
       return (
          <div
             className="modal fade"
@@ -195,7 +249,12 @@ class UpdateModal extends Component {
                      >
                         Close
                      </button>
-                     <button type="button" className="btn btn-primary">
+                     <button
+                        type="button"
+                        onClick={this.handleSaveChanges}
+                        className="btn btn-primary"
+                        // data-bs-dismiss="modal" This closes the Modal
+                     >
                         Save changes
                      </button>
                   </div>

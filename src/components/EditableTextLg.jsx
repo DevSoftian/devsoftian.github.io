@@ -6,10 +6,11 @@ export default function EditableTextLg(props) {
    return (
       <React.Fragment>
          <EditTextarea
-            name="textboxlg"
+            name={props.moniker}
             rows={props.lines}
             defaultValue={props.value}
             style={{ fontSize: "16px" }}
+            onSave={props.onSave}
          />
       </React.Fragment>
    );

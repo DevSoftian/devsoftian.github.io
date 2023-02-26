@@ -1,44 +1,37 @@
-import { each } from "jquery";
 import React, { Component } from "react";
+import "./dropdownElement.css";
 
 class DropdownElement extends Component {
    state = {};
 
    handleDropdownItems = (items) => {
-      console.log("items", items);
       let itemCells = [];
-      for (let item of items)
-         itemCells.push(
-            <li>
-               <a class="dropdown-item" href="#">
-                  {item}
-               </a>
-            </li>
-         );
+      itemCells.push(
+         <option value={this.props.value}>{this.props.value}</option>
+      );
+      for (let item of items) {
+         if (item != this.props.value) {
+            itemCells.push(<option value={item}> {item}</option>);
+         } else {
+            console.log("item skipped ", item);
+         }
+      }
       return itemCells;
    };
 
    render() {
-      console.log("Dropdown props", this.props);
+      let newId = this.props.moniker + "-element";
+      let defaultValue = this.props.value + " Current";
       return (
          <React.Fragment>
-            <div class="dropdown">
-               <button
-                  class="btndropdown-toggle"
-                  type="button"
-                  id="dropdownMenuButton1"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  disabled="disabled"
+            <div class="dropdown-element">
+               <select
+                  // onChange={this.props.onChange}
+                  name={this.props.moniker}
+                  id={newId}
                >
-                  {this.props.value}
-               </button>
-               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                   {this.handleDropdownItems(this.props.itemList)}
-                  {/* <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li> */}
-               </ul>
+               </select>
             </div>
          </React.Fragment>
       );
