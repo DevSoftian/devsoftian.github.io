@@ -139,7 +139,7 @@ class UpdateModal extends Component {
       const updateResponse = CRUD.update(
          tokenHeader,
          this.state.bugEdit,
-         config.apiEndpoint + "bugs/createbug"
+         config.apiEndpoint + "bugs/updatebug"
       );
       console.log("Bug Update Report", updateResponse);
 
@@ -253,6 +253,7 @@ class UpdateModal extends Component {
                         type="button"
                         onClick={this.handleSaveChanges}
                         className="btn btn-primary"
+                        data-bs-dismiss="modal"
                         // data-bs-dismiss="modal" This closes the Modal
                      >
                         Save changes
