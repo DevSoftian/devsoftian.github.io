@@ -2,6 +2,7 @@ import React from "react";
 import "react-edit-text/dist/index.css";
 
 export default function DateTimeElement(props) {
+   const { bugElement } = props;
    let newStringy = "";
    if (props.value != null) {
       let stringy = new String(props.value);
@@ -14,9 +15,9 @@ export default function DateTimeElement(props) {
    return (
       <React.Fragment>
          <input
-            name={props.moniker}
-            onSave={props.onSave}
-            rows={props.lines}
+            name={bugElement.moniker}
+            onSave={bugElement.onSave}
+            rows={bugElement.lines}
             defaultValue={newStringy}
             id={newId}
             class="form-control"

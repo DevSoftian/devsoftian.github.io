@@ -12,7 +12,7 @@ export async function registerUser(user) {
          name: user.name,
       }
    );
-   console.log("response " + response.data);
+   console.log("Register response " + response.data);
 }
 
 export async function loginUser(user) {
@@ -23,6 +23,6 @@ export async function loginUser(user) {
          username: user.username,
       }
    );
-   // console.log("response " + response.data);
+   console.log("Login response " + response.data);
    return response;
 }

@@ -8,6 +8,7 @@ import DateTimeElement from "./DateTimeElement";
 import DropdownElement from "./DropdownElement";
 import CRUD from "./CRUD";
 import config from "../config.json";
+import jwt_decode from "jwt-decode";
 
 class UpdateModal extends Component {
    state = {
@@ -92,15 +93,7 @@ class UpdateModal extends Component {
       bugFixedItems: ["ASSIGNED", "LOGGED", "RESOLVED"],
    };
 
-   // onChangeInput = ({ currentTarget: input }) => {
-   //    const bugLog = { ...this.state.bugLog };
-   //    const labels = { ...this.state.labels };
-   //    labels[input.moniker] = "";
-   //    bugLog[input.moniker] = input.value;
-   //    this.setState({ bugLog, labels });
-   // };
-
-   mapBug = (bugStruct) => {
+   mapBug = (bugStruct, role) => {
       let cells = [];
       for (let index = 0; index < Object.keys(bugStruct).length; index++) {
          let bugElement = bugStruct[index];
@@ -108,7 +101,7 @@ class UpdateModal extends Component {
             <div className="clickableBox" onClick={this.handleEdit}>
                <div className="titleist">{bugElement.title}</div>
                <div className="input-group flex-wrap">
-                  {this.handleBugElement(bugElement)}
+                  {this.handleBugElement(bugElement, role)}
                </div>
             </div>
          );
@@ -134,8 +127,6 @@ class UpdateModal extends Component {
          },
       };
 
-      // console.log(this.state.bugLog);
-
       const updateResponse = CRUD.update(
          tokenHeader,
          this.state.bugEdit,
@@ -155,57 +146,144 @@ class UpdateModal extends Component {
       console.log("savedChangesBugEdit", this.state.bugEdit);
    };
 
-   handleBugElement(bugElement) {
-      if (bugElement.bugElementType === "lg")
-         return (
-            <EditableTextLg
-               moniker={bugElement.moniker}
-               value={this.props.selectedBug[bugElement.moniker]}
-               lines={bugElement.lines}
-               onSave={this.handleSave}
-            ></EditableTextLg>
-         );
-      else if (bugElement.bugElementType === "sm")
-         return (
-            <EditableTextSm
-               moniker={bugElement.moniker}
-               value={this.props.selectedBug[bugElement.moniker]}
-               lines={bugElement.lines}
-               onSave={this.handleSave}
-            ></EditableTextSm>
-         );
-      else if (bugElement.bugElementType === "datetime")
-         return (
-            <DateTimeElement
-               moniker={bugElement.moniker}
-               value={this.props.selectedBug[bugElement.moniker]}
-               lines={bugElement.lines}
-               onSave={this.handleSave}
-            ></DateTimeElement>
-         );
-      else if (bugElement.bugElementType === "program-dropdown")
-         return (
-            <DropdownElement
-               moniker={bugElement.moniker}
-               value={this.props.selectedBug[bugElement.moniker]}
-               lines={bugElement.lines}
-               itemList={this.state.programItems}
-            ></DropdownElement>
-         );
-      else if (bugElement.bugElementType === "bugfixed-dropdown")
-         return (
-            <DropdownElement
-               moniker={bugElement.moniker}
-               value={this.props.selectedBug[bugElement.moniker]}
-               itemList={this.state.bugFixedItems}
-               lines={bugElement.lines}
-            ></DropdownElement>
-         );
+   handleBugElement(bugElement, role) {
+      if (role === "Admin") {
+         console.log("Current role is", role);
+         return this.adminModal(bugElement);
+      }
+   }
+
+   adminModal(bugElement) {
+      switch (bugElement.bugElementType) {
+         case "lg":
+            return (
+               <EditableTextLg
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+               ></EditableTextLg>
+            );
+         case "sm":
+            return (
+               <EditableTextSm
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+               ></EditableTextSm>
+            );
+         case "datetime":
+            return (
+               <DateTimeElement
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+               ></DateTimeElement>
+            );
+         case "program-dropdown":
+            return (
+               <DropdownElement
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+                  itemList={this.state.programItems}
+               ></DropdownElement>
+            );
+         case "bugfixed-dropdown":
+            return (
+               <DropdownElement
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+                  itemList={this.state.bugFixedItems}
+               ></DropdownElement>
+            );
+      }
+   }
+
+   managerModal(bugElement) {
+      switch (bugElement.bugElementType) {
+         case "lg":
+            return (
+               <EditableTextLg
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+               ></EditableTextLg>
+            );
+         case "sm":
+            return (
+               <EditableTextSm
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+               ></EditableTextSm>
+            );
+         case "datetime":
+            return (
+               <DateTimeElement
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+               ></DateTimeElement>
+            );
+         case "program-dropdown":
+            return (
+               <DropdownElement
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+                  itemList={this.state.programItems}
+               ></DropdownElement>
+            );
+         case "bugfixed-dropdown":
+            return (
+               <DropdownElement
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+                  itemList={this.state.bugFixedItems}
+               ></DropdownElement>
+            );
+      }
+   }
+
+   userModal(bugElement) {
+      switch (bugElement.bugElementType) {
+         case "lg":
+            return (
+               <EditableTextLg
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+               ></EditableTextLg>
+            );
+         case "sm":
+            return (
+               <EditableTextSm
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+               ></EditableTextSm>
+            );
+         case "datetime":
+            return (
+               <DateTimeElement
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+               ></DateTimeElement>
+            );
+         case "program-dropdown":
+            return (
+               <DropdownElement
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+                  itemList={this.state.programItems}
+               ></DropdownElement>
+            );
+         case "bugfixed-dropdown":
+            return (
+               <DropdownElement
+                  bugElement={bugElement}
+                  value={this.props.selectedBug[bugElement.moniker]}
+                  itemList={this.state.bugFixedItems}
+               ></DropdownElement>
+            );
+      }
    }
 
    render() {
       const { bugStruct, bugEdit } = this.state;
       const selectedBug = this.props.selectedBug;
+      const role = jwt_decode(localStorage.token).role;
+
       for (let key of Object.keys(bugEdit)) {
          bugEdit[key] = selectedBug[key];
       }
@@ -236,7 +314,7 @@ class UpdateModal extends Component {
                   {/*Modal Body*/}
                   <div className="modal-body">
                      <div className="container-fluid">
-                        {this.mapBug(bugStruct)}
+                        {this.mapBug(bugStruct, role)}
                      </div>
                   </div>
 

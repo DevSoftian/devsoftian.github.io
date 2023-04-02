@@ -20,14 +20,15 @@ class DropdownElement extends Component {
    };
 
    render() {
-      let newId = this.props.moniker + "-element";
+      const { bugElement } = this.props;
+      let newId = bugElement.moniker + "-element";
       let defaultValue = this.props.value + " Current";
       return (
          <React.Fragment>
             <div class="dropdown-element">
                <select
                   // onChange={this.props.onChange}
-                  name={this.props.moniker}
+                  name={bugElement.moniker}
                   id={newId}
                >
                   {this.handleDropdownItems(this.props.itemList)}
