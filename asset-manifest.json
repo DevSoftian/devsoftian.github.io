@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/devsoftian.github.io/static/css/main.46ab3751.css",
-    "main.js": "/devsoftian.github.io/static/js/main.dfe39682.js",
-    "static/js/787.29d045fd.chunk.js": "/devsoftian.github.io/static/js/787.29d045fd.chunk.js",
-    "index.html": "/devsoftian.github.io/index.html",
-    "main.46ab3751.css.map": "/devsoftian.github.io/static/css/main.46ab3751.css.map",
-    "main.dfe39682.js.map": "/devsoftian.github.io/static/js/main.dfe39682.js.map",
-    "787.29d045fd.chunk.js.map": "/devsoftian.github.io/static/js/787.29d045fd.chunk.js.map"
+    "main.css": "/static/css/main.46ab3751.css",
+    "main.js": "/static/js/main.d17d9f0c.js",
+    "static/js/787.29d045fd.chunk.js": "/static/js/787.29d045fd.chunk.js",
+    "index.html": "/index.html",
+    "main.46ab3751.css.map": "/static/css/main.46ab3751.css.map",
+    "main.d17d9f0c.js.map": "/static/js/main.d17d9f0c.js.map",
+    "787.29d045fd.chunk.js.map": "/static/js/787.29d045fd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.46ab3751.css",
-    "static/js/main.dfe39682.js"
+    "static/js/main.d17d9f0c.js"
   ]
 }
