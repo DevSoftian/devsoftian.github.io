@@ -62,15 +62,6 @@ class BugSleuth extends Component {
       this.setState({ bugLog, labels });
    };
 
-   handleSelect = (e) => {
-      console.log("handleSelect Triggered", e);
-      // const bugLog = { ...this.state.bugLog };
-      // const labels = { ...this.state.labels };
-      // labels[input.name] = "";
-      // bugLog[input.name] = input.value;
-      // this.setState({ bugLog, labels });
-   };
-
    async componentDidMount() {
       //Gets bug module (information titles) and service (actual bug information).
       const tokenHeader = {
@@ -91,7 +82,6 @@ class BugSleuth extends Component {
 
    render() {
       const { bugLog, labels } = this.state;
-      // console.log("Bugsleuth bugs", this.state.bugs);
       return (
          <div className="mainPage">
             <Navbar />
@@ -106,24 +96,11 @@ class BugSleuth extends Component {
                >
                   Create New Bug
                </button>
-               {/* <StoreAccess bugs={this.state.bugs}></StoreAccess> */}
             </p>
             <div className="collapse" id="collapseExample">
                <div className="card">
                   <div className="card-body">
                      <form onSubmit={this.handleSubmit} autoComplete="off">
-                        {/* <select
-                           class="form-select"
-                           name="program"
-                           aria-label="Default select example"
-                           label={labels.program}
-                           onSelect={this.handleSelect}
-                        >
-                           <option selected>Program</option>
-                           <option value="1">BugSleuth</option>
-                           <option value="2">Topotracker</option>
-                           <option value="3">Other</option>
-                        </select> */}
                         <MinInput
                            className="shortInput"
                            name="program"
