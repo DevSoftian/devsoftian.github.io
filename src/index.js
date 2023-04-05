@@ -16,7 +16,7 @@ ReactDOM.render(
    // Route Declarations
    <StrictMode>
       <Provider store={store}>
-         <HashRouter>
+         <HashRouter base="/">
             <Routes>
                <Route path="/devsoftian.github.io/" element={<LoginForm />} />
                <Route
