@@ -18,19 +18,10 @@ ReactDOM.render(
       <Provider store={store}>
          <HashRouter base="/">
             <Routes>
-               <Route path="/devsoftian.github.io/" element={<LoginForm />} />
-               <Route
-                  path="/devsoftian.github.io/bugsleuth/"
-                  element={<BugSleuth />}
-               />
-               <Route
-                  path="/devsoftian.github.io/topolify/"
-                  element={<App />}
-               />
-               <Route
-                  path="/devsoftian.github.io/signup/"
-                  element={<SignupForm />}
-               />
+               <Route path="/" element={<LoginForm />} />
+               <Route path="/bugsleuth/" element={<BugSleuth />} />
+               <Route path="/topolify/" element={<App />} />
+               <Route path="/signup/" element={<SignupForm />} />
             </Routes>
          </HashRouter>
       </Provider>
