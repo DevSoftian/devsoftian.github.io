@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import React, { StrictMode } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
@@ -16,7 +16,7 @@ ReactDOM.render(
    // Route Declarations
    <StrictMode>
       <Provider store={store}>
-         <BrowserRouter>
+         <HashRouter>
             <Routes>
                <Route path="/devsoftian.github.io/" element={<LoginForm />} />
                <Route
@@ -32,7 +32,7 @@ ReactDOM.render(
                   element={<SignupForm />}
                />
             </Routes>
-         </BrowserRouter>
+         </HashRouter>
       </Provider>
    </StrictMode>,
    document.getElementById("root")
